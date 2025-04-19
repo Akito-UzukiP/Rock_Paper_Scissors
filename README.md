@@ -2,6 +2,7 @@
 
 This is a simulation of multiple Rock-Paper-Scissors units moving around a map and interacting with each other based on the classic game's rules.
 
+![Game Screenshot](screenshot.png)
 ## Requirements
 
 - Python 3.x
