@@ -11,7 +11,7 @@ from shapely.geometry import Point, Polygon
 pygame.init()
 
 # Constants
-WIDTH, HEIGHT = 640, 640
+WIDTH, HEIGHT = 960, 960
 FPS = 144
 MAX_TIME = 3000  # frames before declaring a draw
 BACKGROUND_COLOR = (30, 30, 30)
@@ -24,15 +24,15 @@ OBSTACLE_REPULSION_DISTANCE = 50
 
 # Center attraction to avoid edge clustering
 CENTER_ATTRACTION = True
-CENTER_FORCE = 0.6
+CENTER_FORCE = 0.9
 CENTER_X, CENTER_Y = WIDTH / 2, HEIGHT / 2
 
 # Group behavior variables
 GROUP_BEHAVIOR = True
-GROUP_COHESION = 0.2   # Reduced cohesion
-GROUP_ALIGNMENT = 0.2
+GROUP_COHESION = 0.1   # Reduced cohesion
+GROUP_ALIGNMENT = 0.1
 GROUP_RADIUS = 100
-GROUP_SEPARATION = 0.8  # Separation force strength
+GROUP_SEPARATION = 0.82  # Separation force strength
 GROUP_MIN_DISTANCE = 30  # Maintain this minimum distance between units
 
 # Unit properties
@@ -43,21 +43,21 @@ SCISSORS_COLOR = (255, 0, 0)      # Red
 ROCK_COLOR = (100, 100, 100)      # Gray
 PAPER_COLOR = (0, 0, 255)         # Blue
 MIN_DISTANCE = UNIT_RADIUS * 2    # Minimum distance to count as collision
-REPULSION_FACTOR = 3.0            # Increased repulsion force
+REPULSION_FACTOR = 4.0            # Increased repulsion force
 REPULSION_RADIUS = 150            # Radius within which repulsion occurs
 RANDOM_MOVEMENT = 0.5             # Increased random movement
 COLLISION_CHANCE = 0.3            # Reduced probability of type change on collision
 SHOW_ATTRACTIONS = False          # Whether to show attraction/repulsion lines
 
-# Ability settings
-ABILITY_COOLDOWN = 200            # Frames between ability uses
-TELEPORT_DISTANCE = 150           # Distance for scissors teleport
-SPEED_BOOST_FACTOR = 2.5          # Speed multiplier for rock boost
-SPEED_BOOST_DURATION = 60         # Frames for speed boost
-REPULSION_BOOST_FACTOR = 5.0      # Strength of paper's repulsion ability
-REPULSION_BOOST_RADIUS = 100      # Radius for paper's repulsion
-REPULSION_BOOST_DURATION = 20     # Frames for repulsion boost
-ABILITY_CHANCE = 0.005            # Chance to use ability each frame
+# # Ability settings
+# ABILITY_COOLDOWN = 200            # Frames between ability uses
+# TELEPORT_DISTANCE = 150           # Distance for scissors teleport
+# SPEED_BOOST_FACTOR = 2.5          # Speed multiplier for rock boost
+# SPEED_BOOST_DURATION = 60         # Frames for speed boost
+# REPULSION_BOOST_FACTOR = 5.0      # Strength of paper's repulsion ability
+# REPULSION_BOOST_RADIUS = 100      # Radius for paper's repulsion
+# REPULSION_BOOST_DURATION = 20     # Frames for repulsion boost
+# ABILITY_CHANCE = 0.005            # Chance to use ability each frame
 
 # Initialize screen
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -353,13 +353,32 @@ class Unit:
         # Add random movement
         self.vx += (random.random() - 0.5) * RANDOM_MOVEMENT
         self.vy += (random.random() - 0.5) * RANDOM_MOVEMENT
-        
+
+        # --- 全局分离：强制避免所有单位重叠 ---
+        # 获取所有单位，遍历并施加强分离力
+        global all_units
+        if 'all_units' in globals():
+            sep_x, sep_y = 0, 0
+            for other in all_units:
+                if other is self:
+                    continue
+                dx = self.x - other.x
+                dy = self.y - other.y
+                dist = math.hypot(dx, dy)
+                if dist < MIN_DISTANCE/1.05 and dist > 0:
+                    # 强分离力，距离越近力越大
+                    force = 20.0 * (MIN_DISTANCE - dist) / MIN_DISTANCE
+                    sep_x += (dx / dist) * force
+                    sep_y += (dy / dist) * force
+            self.vx += sep_x
+            self.vy += sep_y
+
         # Normalize velocity if it's too high
         speed = math.sqrt(self.vx ** 2 + self.vy ** 2)
         if speed > UNIT_SPEED:
             self.vx = (self.vx / speed) * UNIT_SPEED
             self.vy = (self.vy / speed) * UNIT_SPEED
-            
+
         # Apply movement
         self.x += self.vx
         self.y += self.vy
@@ -433,16 +452,18 @@ def check_end_condition(units):
 
 def main():
     # Get initial counts from command line arguments or use defaults
-    scissors_count = 50
-    rock_count = 50
-    paper_count = 50
-    
+    scissors_count = 80
+    rock_count = 80
+    paper_count = 80
+
     if len(sys.argv) >= 4:
         scissors_count = int(sys.argv[1])
         rock_count = int(sys.argv[2])
         paper_count = int(sys.argv[3])
-    
+
     units = initialize_units(scissors_count, rock_count, paper_count)
+    global all_units
+    all_units = units  # 供全局分离机制使用
     running = True
     
     # For max time limit
