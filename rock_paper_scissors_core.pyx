@@ -18,7 +18,7 @@ cdef double GROUP_MIN_DISTANCE = 30.0
 cdef double GROUP_COHESION = 0.1
 cdef double GROUP_ALIGNMENT = 0.1
 cdef double GROUP_RADIUS = 100.0
-cdef double CENTER_FORCE = 0.9
+cdef double CENTER_FORCE = 0
 cdef int WIDTH = 960
 cdef int HEIGHT = 960
 
@@ -37,7 +37,26 @@ cdef double rand_double() nogil:
     return r
 
 cdef double distance(double x1, double y1, double x2, double y2) nogil:
-    return hypot(x2 - x1, y2 - y1)
+    # Calculate direct distance
+    cdef double dx = x2 - x1
+    cdef double dy = y2 - y1
+    
+    # Calculate wrap-around distance in x-direction
+    cdef double wrap_dx = dx
+    if dx > WIDTH / 2:
+        wrap_dx = dx - WIDTH
+    elif dx < -WIDTH / 2:
+        wrap_dx = dx + WIDTH
+        
+    # Calculate wrap-around distance in y-direction
+    cdef double wrap_dy = dy
+    if dy > HEIGHT / 2:
+        wrap_dy = dy - HEIGHT
+    elif dy < -HEIGHT / 2:
+        wrap_dy = dy + HEIGHT
+    
+    # Return the shortest distance
+    return hypot(wrap_dx, wrap_dy)
 
 cdef int is_inside_unit(double x, double y, double ux, double uy, double radius) nogil:
     cdef double dist = distance(x, y, ux, uy)
@@ -79,8 +98,22 @@ cdef void calculate_movement(int unit_index, double[:, :] positions, int[:] type
     
     # Attraction to target
     if target_index >= 0:
+        # Get the raw distance vector
         dx = positions[target_index, 0] - unit_x
         dy = positions[target_index, 1] - unit_y
+        
+        # Check for wrap-around shorter path in x-direction
+        if dx > WIDTH / 2:
+            dx = dx - WIDTH
+        elif dx < -WIDTH / 2:
+            dx = dx + WIDTH
+            
+        # Check for wrap-around shorter path in y-direction
+        if dy > HEIGHT / 2:
+            dy = dy - HEIGHT
+        elif dy < -HEIGHT / 2:
+            dy = dy + HEIGHT
+        
         dist = hypot(dx, dy)
         
         if dist > 0:
@@ -95,8 +128,22 @@ cdef void calculate_movement(int unit_index, double[:, :] positions, int[:] type
     
     for i in range(unit_count):
         if i != unit_index and types[i] == predator_type:
+            # Get the raw distance vector (towards the unit)
             dx = unit_x - positions[i, 0]
             dy = unit_y - positions[i, 1]
+            
+            # Check for wrap-around shorter path in x-direction
+            if dx > WIDTH / 2:
+                dx = dx - WIDTH
+            elif dx < -WIDTH / 2:
+                dx = dx + WIDTH
+                
+            # Check for wrap-around shorter path in y-direction
+            if dy > HEIGHT / 2:
+                dy = dy - HEIGHT
+            elif dy < -HEIGHT / 2:
+                dy = dy + HEIGHT
+            
             dist = hypot(dx, dy)
             
             if 0 < dist < REPULSION_RADIUS:
@@ -119,6 +166,19 @@ cdef void calculate_movement(int unit_index, double[:, :] positions, int[:] type
         if i != unit_index and types[i] == unit_type:
             dx = unit_x - positions[i, 0]
             dy = unit_y - positions[i, 1]
+            
+            # Check for wrap-around shorter path in x-direction
+            if dx > WIDTH / 2:
+                dx = dx - WIDTH
+            elif dx < -WIDTH / 2:
+                dx = dx + WIDTH
+                
+            # Check for wrap-around shorter path in y-direction
+            if dy > HEIGHT / 2:
+                dy = dy - HEIGHT
+            elif dy < -HEIGHT / 2:
+                dy = dy + HEIGHT
+                
             dist = hypot(dx, dy)
             
             if dist < GROUP_RADIUS:
@@ -165,16 +225,8 @@ cdef void calculate_movement(int unit_index, double[:, :] positions, int[:] type
         vx += avg_vx * GROUP_ALIGNMENT
         vy += avg_vy * GROUP_ALIGNMENT
     
-    # Center attraction to prevent edge clustering
-    dx = WIDTH / 2 - unit_x
-    dy = HEIGHT / 2 - unit_y
-    dist = hypot(dx, dy)
-    
-    if dist > WIDTH / 4:  # Only apply when far from center
-        strength = CENTER_FORCE * (dist / (WIDTH/2))
-        if dist > 0:
-            vx += (dx / dist) * strength
-            vy += (dy / dist) * strength
+        # We've removed center attraction force since we have cyclic boundaries now
+        # This lets units freely explore the entire space without biasing toward center
     
     # Add random movement
     vx += (rand_double() - 0.5) * RANDOM_MOVEMENT
@@ -189,6 +241,19 @@ cdef void calculate_movement(int unit_index, double[:, :] positions, int[:] type
         if i != unit_index:
             dx = unit_x - positions[i, 0]
             dy = unit_y - positions[i, 1]
+            
+            # Check for wrap-around shorter path in x-direction
+            if dx > WIDTH / 2:
+                dx = dx - WIDTH
+            elif dx < -WIDTH / 2:
+                dx = dx + WIDTH
+                
+            # Check for wrap-around shorter path in y-direction
+            if dy > HEIGHT / 2:
+                dy = dy - HEIGHT
+            elif dy < -HEIGHT / 2:
+                dy = dy + HEIGHT
+                
             dist = hypot(dx, dy)
             
             if dist < MIN_DISTANCE/1.05 and dist > 0:
@@ -211,7 +276,7 @@ cdef void calculate_movement(int unit_index, double[:, :] positions, int[:] type
     velocities[unit_index, 1] = vy
 
 cdef void apply_movement(int unit_count, double[:, :] positions, double[:, :] velocities) nogil:
-    """Apply calculated velocities to positions and handle boundaries"""
+    """Apply calculated velocities to positions and handle cyclic boundaries"""
     cdef int i
     cdef double x, y, vx, vy
     
@@ -226,20 +291,18 @@ cdef void apply_movement(int unit_count, double[:, :] positions, double[:, :] ve
         x += vx
         y += vy
         
-        # Boundary handling with bounce
-        if x < 5:  # UNIT_RADIUS
-            x = 5
-            vx *= -0.5  # Bounce with energy loss
-        elif x > WIDTH - 5:
-            x = WIDTH - 5
-            vx *= -0.5
-            
-        if y < 5:
-            y = 5
-            vy *= -0.5
-        elif y > HEIGHT - 5:
-            y = HEIGHT - 5
-            vy *= -0.5
+        # Cyclic boundary handling - wrap around to the opposite side
+        # For x-coordinate
+        if x < 0:
+            x += WIDTH  # Wrap to right side
+        elif x >= WIDTH:
+            x -= WIDTH  # Wrap to left side
+        
+        # For y-coordinate
+        if y < 0:
+            y += HEIGHT  # Wrap to bottom
+        elif y >= HEIGHT:
+            y -= HEIGHT  # Wrap to top
         
         # Update position and velocity
         positions[i, 0] = x

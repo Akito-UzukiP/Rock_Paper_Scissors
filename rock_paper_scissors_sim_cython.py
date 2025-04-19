@@ -21,7 +21,7 @@ if len(sys.argv) >= 5 and sys.argv[4] == '-b':
     MAX_TIME = int(sys.argv[5])
     print(f'Running in benchmark mode with MAX_TIME={MAX_TIME}')
 
-MAX_TIME = 3000  # frames before declaring a draw
+MAX_TIME = 30000  # frames before declaring a draw
 BACKGROUND_COLOR = (30, 30, 30)
 
 # Obstacle settings
@@ -169,9 +169,9 @@ class CythonSimulation:
 
 def main():
     # Get initial counts from command line arguments or use defaults
-    scissors_count = 80
-    rock_count = 80
-    paper_count = 80
+    scissors_count = 200
+    rock_count = 200
+    paper_count = 200
 
     if len(sys.argv) >= 4:
         scissors_count = int(sys.argv[1])

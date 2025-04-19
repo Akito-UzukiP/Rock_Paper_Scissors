@@ -2778,29 +2778,186 @@ static double __pyx_f_24rock_paper_scissors_core_rand_double(void) {
  *     return r
  * 
  * cdef double distance(double x1, double y1, double x2, double y2) nogil:             # <<<<<<<<<<<<<<
- *     return hypot(x2 - x1, y2 - y1)
- * 
+ *     # Calculate direct distance
+ *     cdef double dx = x2 - x1
  */
 
 static double __pyx_f_24rock_paper_scissors_core_distance(double __pyx_v_x1, double __pyx_v_y1, double __pyx_v_x2, double __pyx_v_y2) {
+  double __pyx_v_dx;
+  double __pyx_v_dy;
+  double __pyx_v_wrap_dx;
+  double __pyx_v_wrap_dy;
   double __pyx_r;
+  int __pyx_t_1;
 
-  /* "rock_paper_scissors_core.pyx":40
- * 
+  /* "rock_paper_scissors_core.pyx":41
  * cdef double distance(double x1, double y1, double x2, double y2) nogil:
- *     return hypot(x2 - x1, y2 - y1)             # <<<<<<<<<<<<<<
+ *     # Calculate direct distance
+ *     cdef double dx = x2 - x1             # <<<<<<<<<<<<<<
+ *     cdef double dy = y2 - y1
+ * 
+ */
+  __pyx_v_dx = (__pyx_v_x2 - __pyx_v_x1);
+
+  /* "rock_paper_scissors_core.pyx":42
+ *     # Calculate direct distance
+ *     cdef double dx = x2 - x1
+ *     cdef double dy = y2 - y1             # <<<<<<<<<<<<<<
+ * 
+ *     # Calculate wrap-around distance in x-direction
+ */
+  __pyx_v_dy = (__pyx_v_y2 - __pyx_v_y1);
+
+  /* "rock_paper_scissors_core.pyx":45
+ * 
+ *     # Calculate wrap-around distance in x-direction
+ *     cdef double wrap_dx = dx             # <<<<<<<<<<<<<<
+ *     if dx > WIDTH / 2:
+ *         wrap_dx = dx - WIDTH
+ */
+  __pyx_v_wrap_dx = __pyx_v_dx;
+
+  /* "rock_paper_scissors_core.pyx":46
+ *     # Calculate wrap-around distance in x-direction
+ *     cdef double wrap_dx = dx
+ *     if dx > WIDTH / 2:             # <<<<<<<<<<<<<<
+ *         wrap_dx = dx - WIDTH
+ *     elif dx < -WIDTH / 2:
+ */
+  __pyx_t_1 = ((__pyx_v_dx > (((long)__pyx_v_24rock_paper_scissors_core_WIDTH) / 2)) != 0);
+  if (__pyx_t_1) {
+
+    /* "rock_paper_scissors_core.pyx":47
+ *     cdef double wrap_dx = dx
+ *     if dx > WIDTH / 2:
+ *         wrap_dx = dx - WIDTH             # <<<<<<<<<<<<<<
+ *     elif dx < -WIDTH / 2:
+ *         wrap_dx = dx + WIDTH
+ */
+    __pyx_v_wrap_dx = (__pyx_v_dx - __pyx_v_24rock_paper_scissors_core_WIDTH);
+
+    /* "rock_paper_scissors_core.pyx":46
+ *     # Calculate wrap-around distance in x-direction
+ *     cdef double wrap_dx = dx
+ *     if dx > WIDTH / 2:             # <<<<<<<<<<<<<<
+ *         wrap_dx = dx - WIDTH
+ *     elif dx < -WIDTH / 2:
+ */
+    goto __pyx_L3;
+  }
+
+  /* "rock_paper_scissors_core.pyx":48
+ *     if dx > WIDTH / 2:
+ *         wrap_dx = dx - WIDTH
+ *     elif dx < -WIDTH / 2:             # <<<<<<<<<<<<<<
+ *         wrap_dx = dx + WIDTH
+ * 
+ */
+  __pyx_t_1 = ((__pyx_v_dx < (((long)(-__pyx_v_24rock_paper_scissors_core_WIDTH)) / 2)) != 0);
+  if (__pyx_t_1) {
+
+    /* "rock_paper_scissors_core.pyx":49
+ *         wrap_dx = dx - WIDTH
+ *     elif dx < -WIDTH / 2:
+ *         wrap_dx = dx + WIDTH             # <<<<<<<<<<<<<<
+ * 
+ *     # Calculate wrap-around distance in y-direction
+ */
+    __pyx_v_wrap_dx = (__pyx_v_dx + __pyx_v_24rock_paper_scissors_core_WIDTH);
+
+    /* "rock_paper_scissors_core.pyx":48
+ *     if dx > WIDTH / 2:
+ *         wrap_dx = dx - WIDTH
+ *     elif dx < -WIDTH / 2:             # <<<<<<<<<<<<<<
+ *         wrap_dx = dx + WIDTH
+ * 
+ */
+  }
+  __pyx_L3:;
+
+  /* "rock_paper_scissors_core.pyx":52
+ * 
+ *     # Calculate wrap-around distance in y-direction
+ *     cdef double wrap_dy = dy             # <<<<<<<<<<<<<<
+ *     if dy > HEIGHT / 2:
+ *         wrap_dy = dy - HEIGHT
+ */
+  __pyx_v_wrap_dy = __pyx_v_dy;
+
+  /* "rock_paper_scissors_core.pyx":53
+ *     # Calculate wrap-around distance in y-direction
+ *     cdef double wrap_dy = dy
+ *     if dy > HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *         wrap_dy = dy - HEIGHT
+ *     elif dy < -HEIGHT / 2:
+ */
+  __pyx_t_1 = ((__pyx_v_dy > (((long)__pyx_v_24rock_paper_scissors_core_HEIGHT) / 2)) != 0);
+  if (__pyx_t_1) {
+
+    /* "rock_paper_scissors_core.pyx":54
+ *     cdef double wrap_dy = dy
+ *     if dy > HEIGHT / 2:
+ *         wrap_dy = dy - HEIGHT             # <<<<<<<<<<<<<<
+ *     elif dy < -HEIGHT / 2:
+ *         wrap_dy = dy + HEIGHT
+ */
+    __pyx_v_wrap_dy = (__pyx_v_dy - __pyx_v_24rock_paper_scissors_core_HEIGHT);
+
+    /* "rock_paper_scissors_core.pyx":53
+ *     # Calculate wrap-around distance in y-direction
+ *     cdef double wrap_dy = dy
+ *     if dy > HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *         wrap_dy = dy - HEIGHT
+ *     elif dy < -HEIGHT / 2:
+ */
+    goto __pyx_L4;
+  }
+
+  /* "rock_paper_scissors_core.pyx":55
+ *     if dy > HEIGHT / 2:
+ *         wrap_dy = dy - HEIGHT
+ *     elif dy < -HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *         wrap_dy = dy + HEIGHT
+ * 
+ */
+  __pyx_t_1 = ((__pyx_v_dy < (((long)(-__pyx_v_24rock_paper_scissors_core_HEIGHT)) / 2)) != 0);
+  if (__pyx_t_1) {
+
+    /* "rock_paper_scissors_core.pyx":56
+ *         wrap_dy = dy - HEIGHT
+ *     elif dy < -HEIGHT / 2:
+ *         wrap_dy = dy + HEIGHT             # <<<<<<<<<<<<<<
+ * 
+ *     # Return the shortest distance
+ */
+    __pyx_v_wrap_dy = (__pyx_v_dy + __pyx_v_24rock_paper_scissors_core_HEIGHT);
+
+    /* "rock_paper_scissors_core.pyx":55
+ *     if dy > HEIGHT / 2:
+ *         wrap_dy = dy - HEIGHT
+ *     elif dy < -HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *         wrap_dy = dy + HEIGHT
+ * 
+ */
+  }
+  __pyx_L4:;
+
+  /* "rock_paper_scissors_core.pyx":59
+ * 
+ *     # Return the shortest distance
+ *     return hypot(wrap_dx, wrap_dy)             # <<<<<<<<<<<<<<
  * 
  * cdef int is_inside_unit(double x, double y, double ux, double uy, double radius) nogil:
  */
-  __pyx_r = hypot((__pyx_v_x2 - __pyx_v_x1), (__pyx_v_y2 - __pyx_v_y1));
+  __pyx_r = hypot(__pyx_v_wrap_dx, __pyx_v_wrap_dy);
   goto __pyx_L0;
 
   /* "rock_paper_scissors_core.pyx":39
  *     return r
  * 
  * cdef double distance(double x1, double y1, double x2, double y2) nogil:             # <<<<<<<<<<<<<<
- *     return hypot(x2 - x1, y2 - y1)
- * 
+ *     # Calculate direct distance
+ *     cdef double dx = x2 - x1
  */
 
   /* function exit code */
@@ -2808,8 +2965,8 @@ static double __pyx_f_24rock_paper_scissors_core_distance(double __pyx_v_x1, dou
   return __pyx_r;
 }
 
-/* "rock_paper_scissors_core.pyx":42
- *     return hypot(x2 - x1, y2 - y1)
+/* "rock_paper_scissors_core.pyx":61
+ *     return hypot(wrap_dx, wrap_dy)
  * 
  * cdef int is_inside_unit(double x, double y, double ux, double uy, double radius) nogil:             # <<<<<<<<<<<<<<
  *     cdef double dist = distance(x, y, ux, uy)
@@ -2821,7 +2978,7 @@ static int __pyx_f_24rock_paper_scissors_core_is_inside_unit(double __pyx_v_x, d
   int __pyx_r;
   int __pyx_t_1;
 
-  /* "rock_paper_scissors_core.pyx":43
+  /* "rock_paper_scissors_core.pyx":62
  * 
  * cdef int is_inside_unit(double x, double y, double ux, double uy, double radius) nogil:
  *     cdef double dist = distance(x, y, ux, uy)             # <<<<<<<<<<<<<<
@@ -2830,7 +2987,7 @@ static int __pyx_f_24rock_paper_scissors_core_is_inside_unit(double __pyx_v_x, d
  */
   __pyx_v_dist = __pyx_f_24rock_paper_scissors_core_distance(__pyx_v_x, __pyx_v_y, __pyx_v_ux, __pyx_v_uy);
 
-  /* "rock_paper_scissors_core.pyx":44
+  /* "rock_paper_scissors_core.pyx":63
  * cdef int is_inside_unit(double x, double y, double ux, double uy, double radius) nogil:
  *     cdef double dist = distance(x, y, ux, uy)
  *     return 1 if dist < radius else 0             # <<<<<<<<<<<<<<
@@ -2845,8 +3002,8 @@ static int __pyx_f_24rock_paper_scissors_core_is_inside_unit(double __pyx_v_x, d
   __pyx_r = __pyx_t_1;
   goto __pyx_L0;
 
-  /* "rock_paper_scissors_core.pyx":42
- *     return hypot(x2 - x1, y2 - y1)
+  /* "rock_paper_scissors_core.pyx":61
+ *     return hypot(wrap_dx, wrap_dy)
  * 
  * cdef int is_inside_unit(double x, double y, double ux, double uy, double radius) nogil:             # <<<<<<<<<<<<<<
  *     cdef double dist = distance(x, y, ux, uy)
@@ -2858,7 +3015,7 @@ static int __pyx_f_24rock_paper_scissors_core_is_inside_unit(double __pyx_v_x, d
   return __pyx_r;
 }
 
-/* "rock_paper_scissors_core.pyx":46
+/* "rock_paper_scissors_core.pyx":65
  *     return 1 if dist < radius else 0
  * 
  * cdef int find_target(int unit_type, double unit_x, double unit_y,             # <<<<<<<<<<<<<<
@@ -2882,7 +3039,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
   Py_ssize_t __pyx_t_7;
   Py_ssize_t __pyx_t_8;
 
-  /* "rock_paper_scissors_core.pyx":49
+  /* "rock_paper_scissors_core.pyx":68
  *                     double[:, :] positions, int[:] types, int unit_count) nogil:
  *     """Find nearest target unit that this unit can chase"""
  *     cdef int target_type = (unit_type + 2) % 3             # <<<<<<<<<<<<<<
@@ -2891,7 +3048,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
  */
   __pyx_v_target_type = ((__pyx_v_unit_type + 2) % 3);
 
-  /* "rock_paper_scissors_core.pyx":50
+  /* "rock_paper_scissors_core.pyx":69
  *     """Find nearest target unit that this unit can chase"""
  *     cdef int target_type = (unit_type + 2) % 3
  *     cdef double min_dist = 1e9             # <<<<<<<<<<<<<<
@@ -2900,7 +3057,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
  */
   __pyx_v_min_dist = 1e9;
 
-  /* "rock_paper_scissors_core.pyx":51
+  /* "rock_paper_scissors_core.pyx":70
  *     cdef int target_type = (unit_type + 2) % 3
  *     cdef double min_dist = 1e9
  *     cdef int target_index = -1             # <<<<<<<<<<<<<<
@@ -2909,7 +3066,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
  */
   __pyx_v_target_index = -1;
 
-  /* "rock_paper_scissors_core.pyx":56
+  /* "rock_paper_scissors_core.pyx":75
  * 
  *     # Find the closest target
  *     for i in range(unit_count):             # <<<<<<<<<<<<<<
@@ -2921,7 +3078,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "rock_paper_scissors_core.pyx":57
+    /* "rock_paper_scissors_core.pyx":76
  *     # Find the closest target
  *     for i in range(unit_count):
  *         if types[i] == target_type:             # <<<<<<<<<<<<<<
@@ -2932,7 +3089,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
     __pyx_t_5 = (((*((int *) ( /* dim=0 */ (__pyx_v_types.data + __pyx_t_4 * __pyx_v_types.strides[0]) ))) == __pyx_v_target_type) != 0);
     if (__pyx_t_5) {
 
-      /* "rock_paper_scissors_core.pyx":58
+      /* "rock_paper_scissors_core.pyx":77
  *     for i in range(unit_count):
  *         if types[i] == target_type:
  *             d = distance(unit_x, unit_y, positions[i, 0], positions[i, 1])             # <<<<<<<<<<<<<<
@@ -2945,7 +3102,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
       __pyx_t_8 = 1;
       __pyx_v_d = __pyx_f_24rock_paper_scissors_core_distance(__pyx_v_unit_x, __pyx_v_unit_y, (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_4 * __pyx_v_positions.strides[0]) ) + __pyx_t_6 * __pyx_v_positions.strides[1]) ))), (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_7 * __pyx_v_positions.strides[0]) ) + __pyx_t_8 * __pyx_v_positions.strides[1]) ))));
 
-      /* "rock_paper_scissors_core.pyx":59
+      /* "rock_paper_scissors_core.pyx":78
  *         if types[i] == target_type:
  *             d = distance(unit_x, unit_y, positions[i, 0], positions[i, 1])
  *             if d < min_dist:             # <<<<<<<<<<<<<<
@@ -2955,7 +3112,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
       __pyx_t_5 = ((__pyx_v_d < __pyx_v_min_dist) != 0);
       if (__pyx_t_5) {
 
-        /* "rock_paper_scissors_core.pyx":60
+        /* "rock_paper_scissors_core.pyx":79
  *             d = distance(unit_x, unit_y, positions[i, 0], positions[i, 1])
  *             if d < min_dist:
  *                 min_dist = d             # <<<<<<<<<<<<<<
@@ -2964,7 +3121,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
  */
         __pyx_v_min_dist = __pyx_v_d;
 
-        /* "rock_paper_scissors_core.pyx":61
+        /* "rock_paper_scissors_core.pyx":80
  *             if d < min_dist:
  *                 min_dist = d
  *                 target_index = i             # <<<<<<<<<<<<<<
@@ -2973,7 +3130,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
  */
         __pyx_v_target_index = __pyx_v_i;
 
-        /* "rock_paper_scissors_core.pyx":59
+        /* "rock_paper_scissors_core.pyx":78
  *         if types[i] == target_type:
  *             d = distance(unit_x, unit_y, positions[i, 0], positions[i, 1])
  *             if d < min_dist:             # <<<<<<<<<<<<<<
@@ -2982,7 +3139,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
  */
       }
 
-      /* "rock_paper_scissors_core.pyx":57
+      /* "rock_paper_scissors_core.pyx":76
  *     # Find the closest target
  *     for i in range(unit_count):
  *         if types[i] == target_type:             # <<<<<<<<<<<<<<
@@ -2992,7 +3149,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
     }
   }
 
-  /* "rock_paper_scissors_core.pyx":63
+  /* "rock_paper_scissors_core.pyx":82
  *                 target_index = i
  * 
  *     return target_index             # <<<<<<<<<<<<<<
@@ -3002,7 +3159,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
   __pyx_r = __pyx_v_target_index;
   goto __pyx_L0;
 
-  /* "rock_paper_scissors_core.pyx":46
+  /* "rock_paper_scissors_core.pyx":65
  *     return 1 if dist < radius else 0
  * 
  * cdef int find_target(int unit_type, double unit_x, double unit_y,             # <<<<<<<<<<<<<<
@@ -3015,7 +3172,7 @@ static int __pyx_f_24rock_paper_scissors_core_find_target(int __pyx_v_unit_type,
   return __pyx_r;
 }
 
-/* "rock_paper_scissors_core.pyx":65
+/* "rock_paper_scissors_core.pyx":84
  *     return target_index
  * 
  * cdef void calculate_movement(int unit_index, double[:, :] positions, int[:] types,             # <<<<<<<<<<<<<<
@@ -3059,7 +3216,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   int __pyx_t_9;
   int __pyx_t_10;
 
-  /* "rock_paper_scissors_core.pyx":68
+  /* "rock_paper_scissors_core.pyx":87
  *                            double[:, :] velocities, int[:] targets, int unit_count) nogil:
  *     """Calculate movement for a single unit"""
  *     cdef double unit_x = positions[unit_index, 0]             # <<<<<<<<<<<<<<
@@ -3070,7 +3227,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   __pyx_t_2 = 0;
   __pyx_v_unit_x = (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_1 * __pyx_v_positions.strides[0]) ) + __pyx_t_2 * __pyx_v_positions.strides[1]) )));
 
-  /* "rock_paper_scissors_core.pyx":69
+  /* "rock_paper_scissors_core.pyx":88
  *     """Calculate movement for a single unit"""
  *     cdef double unit_x = positions[unit_index, 0]
  *     cdef double unit_y = positions[unit_index, 1]             # <<<<<<<<<<<<<<
@@ -3081,7 +3238,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   __pyx_t_1 = 1;
   __pyx_v_unit_y = (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_2 * __pyx_v_positions.strides[0]) ) + __pyx_t_1 * __pyx_v_positions.strides[1]) )));
 
-  /* "rock_paper_scissors_core.pyx":70
+  /* "rock_paper_scissors_core.pyx":89
  *     cdef double unit_x = positions[unit_index, 0]
  *     cdef double unit_y = positions[unit_index, 1]
  *     cdef int unit_type = types[unit_index]             # <<<<<<<<<<<<<<
@@ -3091,7 +3248,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   __pyx_t_1 = __pyx_v_unit_index;
   __pyx_v_unit_type = (*((int *) ( /* dim=0 */ (__pyx_v_types.data + __pyx_t_1 * __pyx_v_types.strides[0]) )));
 
-  /* "rock_paper_scissors_core.pyx":73
+  /* "rock_paper_scissors_core.pyx":92
  * 
  *     # Initialize velocity components
  *     cdef double vx = 0.0             # <<<<<<<<<<<<<<
@@ -3100,7 +3257,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_vx = 0.0;
 
-  /* "rock_paper_scissors_core.pyx":74
+  /* "rock_paper_scissors_core.pyx":93
  *     # Initialize velocity components
  *     cdef double vx = 0.0
  *     cdef double vy = 0.0             # <<<<<<<<<<<<<<
@@ -3109,7 +3266,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_vy = 0.0;
 
-  /* "rock_paper_scissors_core.pyx":77
+  /* "rock_paper_scissors_core.pyx":96
  * 
  *     # Get target information
  *     cdef int target_index = targets[unit_index]             # <<<<<<<<<<<<<<
@@ -3119,48 +3276,164 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   __pyx_t_1 = __pyx_v_unit_index;
   __pyx_v_target_index = (*((int *) ( /* dim=0 */ (__pyx_v_targets.data + __pyx_t_1 * __pyx_v_targets.strides[0]) )));
 
-  /* "rock_paper_scissors_core.pyx":81
+  /* "rock_paper_scissors_core.pyx":100
  * 
  *     # Attraction to target
  *     if target_index >= 0:             # <<<<<<<<<<<<<<
+ *         # Get the raw distance vector
  *         dx = positions[target_index, 0] - unit_x
- *         dy = positions[target_index, 1] - unit_y
  */
   __pyx_t_3 = ((__pyx_v_target_index >= 0) != 0);
   if (__pyx_t_3) {
 
-    /* "rock_paper_scissors_core.pyx":82
- *     # Attraction to target
+    /* "rock_paper_scissors_core.pyx":102
  *     if target_index >= 0:
+ *         # Get the raw distance vector
  *         dx = positions[target_index, 0] - unit_x             # <<<<<<<<<<<<<<
  *         dy = positions[target_index, 1] - unit_y
- *         dist = hypot(dx, dy)
+ * 
  */
     __pyx_t_1 = __pyx_v_target_index;
     __pyx_t_2 = 0;
     __pyx_v_dx = ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_1 * __pyx_v_positions.strides[0]) ) + __pyx_t_2 * __pyx_v_positions.strides[1]) ))) - __pyx_v_unit_x);
 
-    /* "rock_paper_scissors_core.pyx":83
- *     if target_index >= 0:
+    /* "rock_paper_scissors_core.pyx":103
+ *         # Get the raw distance vector
  *         dx = positions[target_index, 0] - unit_x
  *         dy = positions[target_index, 1] - unit_y             # <<<<<<<<<<<<<<
- *         dist = hypot(dx, dy)
  * 
+ *         # Check for wrap-around shorter path in x-direction
  */
     __pyx_t_2 = __pyx_v_target_index;
     __pyx_t_1 = 1;
     __pyx_v_dy = ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_2 * __pyx_v_positions.strides[0]) ) + __pyx_t_1 * __pyx_v_positions.strides[1]) ))) - __pyx_v_unit_y);
 
-    /* "rock_paper_scissors_core.pyx":84
- *         dx = positions[target_index, 0] - unit_x
- *         dy = positions[target_index, 1] - unit_y
+    /* "rock_paper_scissors_core.pyx":106
+ * 
+ *         # Check for wrap-around shorter path in x-direction
+ *         if dx > WIDTH / 2:             # <<<<<<<<<<<<<<
+ *             dx = dx - WIDTH
+ *         elif dx < -WIDTH / 2:
+ */
+    __pyx_t_3 = ((__pyx_v_dx > (((long)__pyx_v_24rock_paper_scissors_core_WIDTH) / 2)) != 0);
+    if (__pyx_t_3) {
+
+      /* "rock_paper_scissors_core.pyx":107
+ *         # Check for wrap-around shorter path in x-direction
+ *         if dx > WIDTH / 2:
+ *             dx = dx - WIDTH             # <<<<<<<<<<<<<<
+ *         elif dx < -WIDTH / 2:
+ *             dx = dx + WIDTH
+ */
+      __pyx_v_dx = (__pyx_v_dx - __pyx_v_24rock_paper_scissors_core_WIDTH);
+
+      /* "rock_paper_scissors_core.pyx":106
+ * 
+ *         # Check for wrap-around shorter path in x-direction
+ *         if dx > WIDTH / 2:             # <<<<<<<<<<<<<<
+ *             dx = dx - WIDTH
+ *         elif dx < -WIDTH / 2:
+ */
+      goto __pyx_L4;
+    }
+
+    /* "rock_paper_scissors_core.pyx":108
+ *         if dx > WIDTH / 2:
+ *             dx = dx - WIDTH
+ *         elif dx < -WIDTH / 2:             # <<<<<<<<<<<<<<
+ *             dx = dx + WIDTH
+ * 
+ */
+    __pyx_t_3 = ((__pyx_v_dx < (((long)(-__pyx_v_24rock_paper_scissors_core_WIDTH)) / 2)) != 0);
+    if (__pyx_t_3) {
+
+      /* "rock_paper_scissors_core.pyx":109
+ *             dx = dx - WIDTH
+ *         elif dx < -WIDTH / 2:
+ *             dx = dx + WIDTH             # <<<<<<<<<<<<<<
+ * 
+ *         # Check for wrap-around shorter path in y-direction
+ */
+      __pyx_v_dx = (__pyx_v_dx + __pyx_v_24rock_paper_scissors_core_WIDTH);
+
+      /* "rock_paper_scissors_core.pyx":108
+ *         if dx > WIDTH / 2:
+ *             dx = dx - WIDTH
+ *         elif dx < -WIDTH / 2:             # <<<<<<<<<<<<<<
+ *             dx = dx + WIDTH
+ * 
+ */
+    }
+    __pyx_L4:;
+
+    /* "rock_paper_scissors_core.pyx":112
+ * 
+ *         # Check for wrap-around shorter path in y-direction
+ *         if dy > HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *             dy = dy - HEIGHT
+ *         elif dy < -HEIGHT / 2:
+ */
+    __pyx_t_3 = ((__pyx_v_dy > (((long)__pyx_v_24rock_paper_scissors_core_HEIGHT) / 2)) != 0);
+    if (__pyx_t_3) {
+
+      /* "rock_paper_scissors_core.pyx":113
+ *         # Check for wrap-around shorter path in y-direction
+ *         if dy > HEIGHT / 2:
+ *             dy = dy - HEIGHT             # <<<<<<<<<<<<<<
+ *         elif dy < -HEIGHT / 2:
+ *             dy = dy + HEIGHT
+ */
+      __pyx_v_dy = (__pyx_v_dy - __pyx_v_24rock_paper_scissors_core_HEIGHT);
+
+      /* "rock_paper_scissors_core.pyx":112
+ * 
+ *         # Check for wrap-around shorter path in y-direction
+ *         if dy > HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *             dy = dy - HEIGHT
+ *         elif dy < -HEIGHT / 2:
+ */
+      goto __pyx_L5;
+    }
+
+    /* "rock_paper_scissors_core.pyx":114
+ *         if dy > HEIGHT / 2:
+ *             dy = dy - HEIGHT
+ *         elif dy < -HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *             dy = dy + HEIGHT
+ * 
+ */
+    __pyx_t_3 = ((__pyx_v_dy < (((long)(-__pyx_v_24rock_paper_scissors_core_HEIGHT)) / 2)) != 0);
+    if (__pyx_t_3) {
+
+      /* "rock_paper_scissors_core.pyx":115
+ *             dy = dy - HEIGHT
+ *         elif dy < -HEIGHT / 2:
+ *             dy = dy + HEIGHT             # <<<<<<<<<<<<<<
+ * 
+ *         dist = hypot(dx, dy)
+ */
+      __pyx_v_dy = (__pyx_v_dy + __pyx_v_24rock_paper_scissors_core_HEIGHT);
+
+      /* "rock_paper_scissors_core.pyx":114
+ *         if dy > HEIGHT / 2:
+ *             dy = dy - HEIGHT
+ *         elif dy < -HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *             dy = dy + HEIGHT
+ * 
+ */
+    }
+    __pyx_L5:;
+
+    /* "rock_paper_scissors_core.pyx":117
+ *             dy = dy + HEIGHT
+ * 
  *         dist = hypot(dx, dy)             # <<<<<<<<<<<<<<
  * 
  *         if dist > 0:
  */
     __pyx_v_dist = hypot(__pyx_v_dx, __pyx_v_dy);
 
-    /* "rock_paper_scissors_core.pyx":86
+    /* "rock_paper_scissors_core.pyx":119
  *         dist = hypot(dx, dy)
  * 
  *         if dist > 0:             # <<<<<<<<<<<<<<
@@ -3170,7 +3443,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
     __pyx_t_3 = ((__pyx_v_dist > 0.0) != 0);
     if (__pyx_t_3) {
 
-      /* "rock_paper_scissors_core.pyx":88
+      /* "rock_paper_scissors_core.pyx":121
  *         if dist > 0:
  *             # Attraction force
  *             strength = max(0.7, 1 - REPULSION_FACTOR/2)             # <<<<<<<<<<<<<<
@@ -3186,7 +3459,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
       }
       __pyx_v_strength = __pyx_t_6;
 
-      /* "rock_paper_scissors_core.pyx":89
+      /* "rock_paper_scissors_core.pyx":122
  *             # Attraction force
  *             strength = max(0.7, 1 - REPULSION_FACTOR/2)
  *             vx = (dx / dist) * UNIT_SPEED * strength             # <<<<<<<<<<<<<<
@@ -3195,7 +3468,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
       __pyx_v_vx = (((__pyx_v_dx / __pyx_v_dist) * __pyx_v_24rock_paper_scissors_core_UNIT_SPEED) * __pyx_v_strength);
 
-      /* "rock_paper_scissors_core.pyx":90
+      /* "rock_paper_scissors_core.pyx":123
  *             strength = max(0.7, 1 - REPULSION_FACTOR/2)
  *             vx = (dx / dist) * UNIT_SPEED * strength
  *             vy = (dy / dist) * UNIT_SPEED * strength             # <<<<<<<<<<<<<<
@@ -3204,7 +3477,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
       __pyx_v_vy = (((__pyx_v_dy / __pyx_v_dist) * __pyx_v_24rock_paper_scissors_core_UNIT_SPEED) * __pyx_v_strength);
 
-      /* "rock_paper_scissors_core.pyx":86
+      /* "rock_paper_scissors_core.pyx":119
  *         dist = hypot(dx, dy)
  * 
  *         if dist > 0:             # <<<<<<<<<<<<<<
@@ -3213,16 +3486,16 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     }
 
-    /* "rock_paper_scissors_core.pyx":81
+    /* "rock_paper_scissors_core.pyx":100
  * 
  *     # Attraction to target
  *     if target_index >= 0:             # <<<<<<<<<<<<<<
+ *         # Get the raw distance vector
  *         dx = positions[target_index, 0] - unit_x
- *         dy = positions[target_index, 1] - unit_y
  */
   }
 
-  /* "rock_paper_scissors_core.pyx":93
+  /* "rock_paper_scissors_core.pyx":126
  * 
  *     # Repulsion from threats (units that can defeat this unit)
  *     cdef int predator_type = (unit_type + 1) % 3             # <<<<<<<<<<<<<<
@@ -3231,69 +3504,185 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_predator_type = ((__pyx_v_unit_type + 1) % 3);
 
-  /* "rock_paper_scissors_core.pyx":96
+  /* "rock_paper_scissors_core.pyx":129
  *     cdef int i
  * 
  *     for i in range(unit_count):             # <<<<<<<<<<<<<<
  *         if i != unit_index and types[i] == predator_type:
- *             dx = unit_x - positions[i, 0]
+ *             # Get the raw distance vector (towards the unit)
  */
   __pyx_t_7 = __pyx_v_unit_count;
   __pyx_t_8 = __pyx_t_7;
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "rock_paper_scissors_core.pyx":97
+    /* "rock_paper_scissors_core.pyx":130
  * 
  *     for i in range(unit_count):
  *         if i != unit_index and types[i] == predator_type:             # <<<<<<<<<<<<<<
+ *             # Get the raw distance vector (towards the unit)
  *             dx = unit_x - positions[i, 0]
- *             dy = unit_y - positions[i, 1]
  */
     __pyx_t_10 = ((__pyx_v_i != __pyx_v_unit_index) != 0);
     if (__pyx_t_10) {
     } else {
       __pyx_t_3 = __pyx_t_10;
-      goto __pyx_L8_bool_binop_done;
+      goto __pyx_L10_bool_binop_done;
     }
     __pyx_t_1 = __pyx_v_i;
     __pyx_t_10 = (((*((int *) ( /* dim=0 */ (__pyx_v_types.data + __pyx_t_1 * __pyx_v_types.strides[0]) ))) == __pyx_v_predator_type) != 0);
     __pyx_t_3 = __pyx_t_10;
-    __pyx_L8_bool_binop_done:;
+    __pyx_L10_bool_binop_done:;
     if (__pyx_t_3) {
 
-      /* "rock_paper_scissors_core.pyx":98
- *     for i in range(unit_count):
+      /* "rock_paper_scissors_core.pyx":132
  *         if i != unit_index and types[i] == predator_type:
+ *             # Get the raw distance vector (towards the unit)
  *             dx = unit_x - positions[i, 0]             # <<<<<<<<<<<<<<
  *             dy = unit_y - positions[i, 1]
- *             dist = hypot(dx, dy)
+ * 
  */
       __pyx_t_1 = __pyx_v_i;
       __pyx_t_2 = 0;
       __pyx_v_dx = (__pyx_v_unit_x - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_1 * __pyx_v_positions.strides[0]) ) + __pyx_t_2 * __pyx_v_positions.strides[1]) ))));
 
-      /* "rock_paper_scissors_core.pyx":99
- *         if i != unit_index and types[i] == predator_type:
+      /* "rock_paper_scissors_core.pyx":133
+ *             # Get the raw distance vector (towards the unit)
  *             dx = unit_x - positions[i, 0]
  *             dy = unit_y - positions[i, 1]             # <<<<<<<<<<<<<<
- *             dist = hypot(dx, dy)
  * 
+ *             # Check for wrap-around shorter path in x-direction
  */
       __pyx_t_2 = __pyx_v_i;
       __pyx_t_1 = 1;
       __pyx_v_dy = (__pyx_v_unit_y - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_2 * __pyx_v_positions.strides[0]) ) + __pyx_t_1 * __pyx_v_positions.strides[1]) ))));
 
-      /* "rock_paper_scissors_core.pyx":100
- *             dx = unit_x - positions[i, 0]
- *             dy = unit_y - positions[i, 1]
+      /* "rock_paper_scissors_core.pyx":136
+ * 
+ *             # Check for wrap-around shorter path in x-direction
+ *             if dx > WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:
+ */
+      __pyx_t_3 = ((__pyx_v_dx > (((long)__pyx_v_24rock_paper_scissors_core_WIDTH) / 2)) != 0);
+      if (__pyx_t_3) {
+
+        /* "rock_paper_scissors_core.pyx":137
+ *             # Check for wrap-around shorter path in x-direction
+ *             if dx > WIDTH / 2:
+ *                 dx = dx - WIDTH             # <<<<<<<<<<<<<<
+ *             elif dx < -WIDTH / 2:
+ *                 dx = dx + WIDTH
+ */
+        __pyx_v_dx = (__pyx_v_dx - __pyx_v_24rock_paper_scissors_core_WIDTH);
+
+        /* "rock_paper_scissors_core.pyx":136
+ * 
+ *             # Check for wrap-around shorter path in x-direction
+ *             if dx > WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:
+ */
+        goto __pyx_L12;
+      }
+
+      /* "rock_paper_scissors_core.pyx":138
+ *             if dx > WIDTH / 2:
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx + WIDTH
+ * 
+ */
+      __pyx_t_3 = ((__pyx_v_dx < (((long)(-__pyx_v_24rock_paper_scissors_core_WIDTH)) / 2)) != 0);
+      if (__pyx_t_3) {
+
+        /* "rock_paper_scissors_core.pyx":139
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:
+ *                 dx = dx + WIDTH             # <<<<<<<<<<<<<<
+ * 
+ *             # Check for wrap-around shorter path in y-direction
+ */
+        __pyx_v_dx = (__pyx_v_dx + __pyx_v_24rock_paper_scissors_core_WIDTH);
+
+        /* "rock_paper_scissors_core.pyx":138
+ *             if dx > WIDTH / 2:
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx + WIDTH
+ * 
+ */
+      }
+      __pyx_L12:;
+
+      /* "rock_paper_scissors_core.pyx":142
+ * 
+ *             # Check for wrap-around shorter path in y-direction
+ *             if dy > HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:
+ */
+      __pyx_t_3 = ((__pyx_v_dy > (((long)__pyx_v_24rock_paper_scissors_core_HEIGHT) / 2)) != 0);
+      if (__pyx_t_3) {
+
+        /* "rock_paper_scissors_core.pyx":143
+ *             # Check for wrap-around shorter path in y-direction
+ *             if dy > HEIGHT / 2:
+ *                 dy = dy - HEIGHT             # <<<<<<<<<<<<<<
+ *             elif dy < -HEIGHT / 2:
+ *                 dy = dy + HEIGHT
+ */
+        __pyx_v_dy = (__pyx_v_dy - __pyx_v_24rock_paper_scissors_core_HEIGHT);
+
+        /* "rock_paper_scissors_core.pyx":142
+ * 
+ *             # Check for wrap-around shorter path in y-direction
+ *             if dy > HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:
+ */
+        goto __pyx_L13;
+      }
+
+      /* "rock_paper_scissors_core.pyx":144
+ *             if dy > HEIGHT / 2:
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy + HEIGHT
+ * 
+ */
+      __pyx_t_3 = ((__pyx_v_dy < (((long)(-__pyx_v_24rock_paper_scissors_core_HEIGHT)) / 2)) != 0);
+      if (__pyx_t_3) {
+
+        /* "rock_paper_scissors_core.pyx":145
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:
+ *                 dy = dy + HEIGHT             # <<<<<<<<<<<<<<
+ * 
+ *             dist = hypot(dx, dy)
+ */
+        __pyx_v_dy = (__pyx_v_dy + __pyx_v_24rock_paper_scissors_core_HEIGHT);
+
+        /* "rock_paper_scissors_core.pyx":144
+ *             if dy > HEIGHT / 2:
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy + HEIGHT
+ * 
+ */
+      }
+      __pyx_L13:;
+
+      /* "rock_paper_scissors_core.pyx":147
+ *                 dy = dy + HEIGHT
+ * 
  *             dist = hypot(dx, dy)             # <<<<<<<<<<<<<<
  * 
  *             if 0 < dist < REPULSION_RADIUS:
  */
       __pyx_v_dist = hypot(__pyx_v_dx, __pyx_v_dy);
 
-      /* "rock_paper_scissors_core.pyx":102
+      /* "rock_paper_scissors_core.pyx":149
  *             dist = hypot(dx, dy)
  * 
  *             if 0 < dist < REPULSION_RADIUS:             # <<<<<<<<<<<<<<
@@ -3307,7 +3696,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
       __pyx_t_10 = (__pyx_t_3 != 0);
       if (__pyx_t_10) {
 
-        /* "rock_paper_scissors_core.pyx":104
+        /* "rock_paper_scissors_core.pyx":151
  *             if 0 < dist < REPULSION_RADIUS:
  *                 # Repulsion force
  *                 strength = REPULSION_FACTOR * (1 - dist / REPULSION_RADIUS)             # <<<<<<<<<<<<<<
@@ -3316,7 +3705,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
         __pyx_v_strength = (__pyx_v_24rock_paper_scissors_core_REPULSION_FACTOR * (1.0 - (__pyx_v_dist / __pyx_v_24rock_paper_scissors_core_REPULSION_RADIUS)));
 
-        /* "rock_paper_scissors_core.pyx":105
+        /* "rock_paper_scissors_core.pyx":152
  *                 # Repulsion force
  *                 strength = REPULSION_FACTOR * (1 - dist / REPULSION_RADIUS)
  *                 vx += (dx / dist) * strength             # <<<<<<<<<<<<<<
@@ -3325,7 +3714,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
         __pyx_v_vx = (__pyx_v_vx + ((__pyx_v_dx / __pyx_v_dist) * __pyx_v_strength));
 
-        /* "rock_paper_scissors_core.pyx":106
+        /* "rock_paper_scissors_core.pyx":153
  *                 strength = REPULSION_FACTOR * (1 - dist / REPULSION_RADIUS)
  *                 vx += (dx / dist) * strength
  *                 vy += (dy / dist) * strength             # <<<<<<<<<<<<<<
@@ -3334,7 +3723,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
         __pyx_v_vy = (__pyx_v_vy + ((__pyx_v_dy / __pyx_v_dist) * __pyx_v_strength));
 
-        /* "rock_paper_scissors_core.pyx":102
+        /* "rock_paper_scissors_core.pyx":149
  *             dist = hypot(dx, dy)
  * 
  *             if 0 < dist < REPULSION_RADIUS:             # <<<<<<<<<<<<<<
@@ -3343,17 +3732,17 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
       }
 
-      /* "rock_paper_scissors_core.pyx":97
+      /* "rock_paper_scissors_core.pyx":130
  * 
  *     for i in range(unit_count):
  *         if i != unit_index and types[i] == predator_type:             # <<<<<<<<<<<<<<
+ *             # Get the raw distance vector (towards the unit)
  *             dx = unit_x - positions[i, 0]
- *             dy = unit_y - positions[i, 1]
  */
     }
   }
 
-  /* "rock_paper_scissors_core.pyx":109
+  /* "rock_paper_scissors_core.pyx":156
  * 
  *     # Group behavior with same type units
  *     cdef double sep_x = 0.0             # <<<<<<<<<<<<<<
@@ -3362,7 +3751,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_sep_x = 0.0;
 
-  /* "rock_paper_scissors_core.pyx":110
+  /* "rock_paper_scissors_core.pyx":157
  *     # Group behavior with same type units
  *     cdef double sep_x = 0.0
  *     cdef double sep_y = 0.0             # <<<<<<<<<<<<<<
@@ -3371,7 +3760,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_sep_y = 0.0;
 
-  /* "rock_paper_scissors_core.pyx":111
+  /* "rock_paper_scissors_core.pyx":158
  *     cdef double sep_x = 0.0
  *     cdef double sep_y = 0.0
  *     cdef int sep_count = 0             # <<<<<<<<<<<<<<
@@ -3380,7 +3769,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_sep_count = 0;
 
-  /* "rock_paper_scissors_core.pyx":112
+  /* "rock_paper_scissors_core.pyx":159
  *     cdef double sep_y = 0.0
  *     cdef int sep_count = 0
  *     cdef double center_x = 0.0             # <<<<<<<<<<<<<<
@@ -3389,7 +3778,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_center_x = 0.0;
 
-  /* "rock_paper_scissors_core.pyx":113
+  /* "rock_paper_scissors_core.pyx":160
  *     cdef int sep_count = 0
  *     cdef double center_x = 0.0
  *     cdef double center_y = 0.0             # <<<<<<<<<<<<<<
@@ -3398,7 +3787,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_center_y = 0.0;
 
-  /* "rock_paper_scissors_core.pyx":114
+  /* "rock_paper_scissors_core.pyx":161
  *     cdef double center_x = 0.0
  *     cdef double center_y = 0.0
  *     cdef int group_count = 0             # <<<<<<<<<<<<<<
@@ -3407,7 +3796,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_group_count = 0;
 
-  /* "rock_paper_scissors_core.pyx":115
+  /* "rock_paper_scissors_core.pyx":162
  *     cdef double center_y = 0.0
  *     cdef int group_count = 0
  *     cdef double avg_vx = 0.0             # <<<<<<<<<<<<<<
@@ -3416,7 +3805,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_avg_vx = 0.0;
 
-  /* "rock_paper_scissors_core.pyx":116
+  /* "rock_paper_scissors_core.pyx":163
  *     cdef int group_count = 0
  *     cdef double avg_vx = 0.0
  *     cdef double avg_vy = 0.0             # <<<<<<<<<<<<<<
@@ -3425,7 +3814,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_avg_vy = 0.0;
 
-  /* "rock_paper_scissors_core.pyx":118
+  /* "rock_paper_scissors_core.pyx":165
  *     cdef double avg_vy = 0.0
  * 
  *     for i in range(unit_count):             # <<<<<<<<<<<<<<
@@ -3437,7 +3826,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "rock_paper_scissors_core.pyx":119
+    /* "rock_paper_scissors_core.pyx":166
  * 
  *     for i in range(unit_count):
  *         if i != unit_index and types[i] == unit_type:             # <<<<<<<<<<<<<<
@@ -3448,46 +3837,162 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
     if (__pyx_t_3) {
     } else {
       __pyx_t_10 = __pyx_t_3;
-      goto __pyx_L14_bool_binop_done;
+      goto __pyx_L18_bool_binop_done;
     }
     __pyx_t_1 = __pyx_v_i;
     __pyx_t_3 = (((*((int *) ( /* dim=0 */ (__pyx_v_types.data + __pyx_t_1 * __pyx_v_types.strides[0]) ))) == __pyx_v_unit_type) != 0);
     __pyx_t_10 = __pyx_t_3;
-    __pyx_L14_bool_binop_done:;
+    __pyx_L18_bool_binop_done:;
     if (__pyx_t_10) {
 
-      /* "rock_paper_scissors_core.pyx":120
+      /* "rock_paper_scissors_core.pyx":167
  *     for i in range(unit_count):
  *         if i != unit_index and types[i] == unit_type:
  *             dx = unit_x - positions[i, 0]             # <<<<<<<<<<<<<<
  *             dy = unit_y - positions[i, 1]
- *             dist = hypot(dx, dy)
+ * 
  */
       __pyx_t_1 = __pyx_v_i;
       __pyx_t_2 = 0;
       __pyx_v_dx = (__pyx_v_unit_x - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_1 * __pyx_v_positions.strides[0]) ) + __pyx_t_2 * __pyx_v_positions.strides[1]) ))));
 
-      /* "rock_paper_scissors_core.pyx":121
+      /* "rock_paper_scissors_core.pyx":168
  *         if i != unit_index and types[i] == unit_type:
  *             dx = unit_x - positions[i, 0]
  *             dy = unit_y - positions[i, 1]             # <<<<<<<<<<<<<<
- *             dist = hypot(dx, dy)
  * 
+ *             # Check for wrap-around shorter path in x-direction
  */
       __pyx_t_2 = __pyx_v_i;
       __pyx_t_1 = 1;
       __pyx_v_dy = (__pyx_v_unit_y - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_2 * __pyx_v_positions.strides[0]) ) + __pyx_t_1 * __pyx_v_positions.strides[1]) ))));
 
-      /* "rock_paper_scissors_core.pyx":122
- *             dx = unit_x - positions[i, 0]
- *             dy = unit_y - positions[i, 1]
+      /* "rock_paper_scissors_core.pyx":171
+ * 
+ *             # Check for wrap-around shorter path in x-direction
+ *             if dx > WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:
+ */
+      __pyx_t_10 = ((__pyx_v_dx > (((long)__pyx_v_24rock_paper_scissors_core_WIDTH) / 2)) != 0);
+      if (__pyx_t_10) {
+
+        /* "rock_paper_scissors_core.pyx":172
+ *             # Check for wrap-around shorter path in x-direction
+ *             if dx > WIDTH / 2:
+ *                 dx = dx - WIDTH             # <<<<<<<<<<<<<<
+ *             elif dx < -WIDTH / 2:
+ *                 dx = dx + WIDTH
+ */
+        __pyx_v_dx = (__pyx_v_dx - __pyx_v_24rock_paper_scissors_core_WIDTH);
+
+        /* "rock_paper_scissors_core.pyx":171
+ * 
+ *             # Check for wrap-around shorter path in x-direction
+ *             if dx > WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:
+ */
+        goto __pyx_L20;
+      }
+
+      /* "rock_paper_scissors_core.pyx":173
+ *             if dx > WIDTH / 2:
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx + WIDTH
+ * 
+ */
+      __pyx_t_10 = ((__pyx_v_dx < (((long)(-__pyx_v_24rock_paper_scissors_core_WIDTH)) / 2)) != 0);
+      if (__pyx_t_10) {
+
+        /* "rock_paper_scissors_core.pyx":174
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:
+ *                 dx = dx + WIDTH             # <<<<<<<<<<<<<<
+ * 
+ *             # Check for wrap-around shorter path in y-direction
+ */
+        __pyx_v_dx = (__pyx_v_dx + __pyx_v_24rock_paper_scissors_core_WIDTH);
+
+        /* "rock_paper_scissors_core.pyx":173
+ *             if dx > WIDTH / 2:
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx + WIDTH
+ * 
+ */
+      }
+      __pyx_L20:;
+
+      /* "rock_paper_scissors_core.pyx":177
+ * 
+ *             # Check for wrap-around shorter path in y-direction
+ *             if dy > HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:
+ */
+      __pyx_t_10 = ((__pyx_v_dy > (((long)__pyx_v_24rock_paper_scissors_core_HEIGHT) / 2)) != 0);
+      if (__pyx_t_10) {
+
+        /* "rock_paper_scissors_core.pyx":178
+ *             # Check for wrap-around shorter path in y-direction
+ *             if dy > HEIGHT / 2:
+ *                 dy = dy - HEIGHT             # <<<<<<<<<<<<<<
+ *             elif dy < -HEIGHT / 2:
+ *                 dy = dy + HEIGHT
+ */
+        __pyx_v_dy = (__pyx_v_dy - __pyx_v_24rock_paper_scissors_core_HEIGHT);
+
+        /* "rock_paper_scissors_core.pyx":177
+ * 
+ *             # Check for wrap-around shorter path in y-direction
+ *             if dy > HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:
+ */
+        goto __pyx_L21;
+      }
+
+      /* "rock_paper_scissors_core.pyx":179
+ *             if dy > HEIGHT / 2:
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy + HEIGHT
+ * 
+ */
+      __pyx_t_10 = ((__pyx_v_dy < (((long)(-__pyx_v_24rock_paper_scissors_core_HEIGHT)) / 2)) != 0);
+      if (__pyx_t_10) {
+
+        /* "rock_paper_scissors_core.pyx":180
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:
+ *                 dy = dy + HEIGHT             # <<<<<<<<<<<<<<
+ * 
+ *             dist = hypot(dx, dy)
+ */
+        __pyx_v_dy = (__pyx_v_dy + __pyx_v_24rock_paper_scissors_core_HEIGHT);
+
+        /* "rock_paper_scissors_core.pyx":179
+ *             if dy > HEIGHT / 2:
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy + HEIGHT
+ * 
+ */
+      }
+      __pyx_L21:;
+
+      /* "rock_paper_scissors_core.pyx":182
+ *                 dy = dy + HEIGHT
+ * 
  *             dist = hypot(dx, dy)             # <<<<<<<<<<<<<<
  * 
  *             if dist < GROUP_RADIUS:
  */
       __pyx_v_dist = hypot(__pyx_v_dx, __pyx_v_dy);
 
-      /* "rock_paper_scissors_core.pyx":124
+      /* "rock_paper_scissors_core.pyx":184
  *             dist = hypot(dx, dy)
  * 
  *             if dist < GROUP_RADIUS:             # <<<<<<<<<<<<<<
@@ -3497,7 +4002,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
       __pyx_t_10 = ((__pyx_v_dist < __pyx_v_24rock_paper_scissors_core_GROUP_RADIUS) != 0);
       if (__pyx_t_10) {
 
-        /* "rock_paper_scissors_core.pyx":126
+        /* "rock_paper_scissors_core.pyx":186
  *             if dist < GROUP_RADIUS:
  *                 # Count this unit for group calculations
  *                 group_count += 1             # <<<<<<<<<<<<<<
@@ -3506,7 +4011,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
         __pyx_v_group_count = (__pyx_v_group_count + 1);
 
-        /* "rock_paper_scissors_core.pyx":129
+        /* "rock_paper_scissors_core.pyx":189
  * 
  *                 # Separation - avoid crowding neighbors
  *                 if dist < GROUP_MIN_DISTANCE and dist > 0:             # <<<<<<<<<<<<<<
@@ -3517,14 +4022,14 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
         if (__pyx_t_3) {
         } else {
           __pyx_t_10 = __pyx_t_3;
-          goto __pyx_L18_bool_binop_done;
+          goto __pyx_L24_bool_binop_done;
         }
         __pyx_t_3 = ((__pyx_v_dist > 0.0) != 0);
         __pyx_t_10 = __pyx_t_3;
-        __pyx_L18_bool_binop_done:;
+        __pyx_L24_bool_binop_done:;
         if (__pyx_t_10) {
 
-          /* "rock_paper_scissors_core.pyx":130
+          /* "rock_paper_scissors_core.pyx":190
  *                 # Separation - avoid crowding neighbors
  *                 if dist < GROUP_MIN_DISTANCE and dist > 0:
  *                     strength = 1.0 - (dist / GROUP_MIN_DISTANCE)             # <<<<<<<<<<<<<<
@@ -3533,7 +4038,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
           __pyx_v_strength = (1.0 - (__pyx_v_dist / __pyx_v_24rock_paper_scissors_core_GROUP_MIN_DISTANCE));
 
-          /* "rock_paper_scissors_core.pyx":131
+          /* "rock_paper_scissors_core.pyx":191
  *                 if dist < GROUP_MIN_DISTANCE and dist > 0:
  *                     strength = 1.0 - (dist / GROUP_MIN_DISTANCE)
  *                     sep_x += (dx / dist) * strength             # <<<<<<<<<<<<<<
@@ -3542,7 +4047,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
           __pyx_v_sep_x = (__pyx_v_sep_x + ((__pyx_v_dx / __pyx_v_dist) * __pyx_v_strength));
 
-          /* "rock_paper_scissors_core.pyx":132
+          /* "rock_paper_scissors_core.pyx":192
  *                     strength = 1.0 - (dist / GROUP_MIN_DISTANCE)
  *                     sep_x += (dx / dist) * strength
  *                     sep_y += (dy / dist) * strength             # <<<<<<<<<<<<<<
@@ -3551,7 +4056,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
           __pyx_v_sep_y = (__pyx_v_sep_y + ((__pyx_v_dy / __pyx_v_dist) * __pyx_v_strength));
 
-          /* "rock_paper_scissors_core.pyx":133
+          /* "rock_paper_scissors_core.pyx":193
  *                     sep_x += (dx / dist) * strength
  *                     sep_y += (dy / dist) * strength
  *                     sep_count += 1             # <<<<<<<<<<<<<<
@@ -3560,7 +4065,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
           __pyx_v_sep_count = (__pyx_v_sep_count + 1);
 
-          /* "rock_paper_scissors_core.pyx":129
+          /* "rock_paper_scissors_core.pyx":189
  * 
  *                 # Separation - avoid crowding neighbors
  *                 if dist < GROUP_MIN_DISTANCE and dist > 0:             # <<<<<<<<<<<<<<
@@ -3569,7 +4074,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
         }
 
-        /* "rock_paper_scissors_core.pyx":136
+        /* "rock_paper_scissors_core.pyx":196
  * 
  *                 # Add to center of mass calculation
  *                 center_x += positions[i, 0]             # <<<<<<<<<<<<<<
@@ -3580,7 +4085,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
         __pyx_t_2 = 0;
         __pyx_v_center_x = (__pyx_v_center_x + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_1 * __pyx_v_positions.strides[0]) ) + __pyx_t_2 * __pyx_v_positions.strides[1]) ))));
 
-        /* "rock_paper_scissors_core.pyx":137
+        /* "rock_paper_scissors_core.pyx":197
  *                 # Add to center of mass calculation
  *                 center_x += positions[i, 0]
  *                 center_y += positions[i, 1]             # <<<<<<<<<<<<<<
@@ -3591,7 +4096,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
         __pyx_t_1 = 1;
         __pyx_v_center_y = (__pyx_v_center_y + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_2 * __pyx_v_positions.strides[0]) ) + __pyx_t_1 * __pyx_v_positions.strides[1]) ))));
 
-        /* "rock_paper_scissors_core.pyx":140
+        /* "rock_paper_scissors_core.pyx":200
  * 
  *                 # Add to velocity alignment
  *                 avg_vx += velocities[i, 0]             # <<<<<<<<<<<<<<
@@ -3602,7 +4107,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
         __pyx_t_2 = 0;
         __pyx_v_avg_vx = (__pyx_v_avg_vx + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_velocities.data + __pyx_t_1 * __pyx_v_velocities.strides[0]) ) + __pyx_t_2 * __pyx_v_velocities.strides[1]) ))));
 
-        /* "rock_paper_scissors_core.pyx":141
+        /* "rock_paper_scissors_core.pyx":201
  *                 # Add to velocity alignment
  *                 avg_vx += velocities[i, 0]
  *                 avg_vy += velocities[i, 1]             # <<<<<<<<<<<<<<
@@ -3613,7 +4118,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
         __pyx_t_1 = 1;
         __pyx_v_avg_vy = (__pyx_v_avg_vy + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_velocities.data + __pyx_t_2 * __pyx_v_velocities.strides[0]) ) + __pyx_t_1 * __pyx_v_velocities.strides[1]) ))));
 
-        /* "rock_paper_scissors_core.pyx":124
+        /* "rock_paper_scissors_core.pyx":184
  *             dist = hypot(dx, dy)
  * 
  *             if dist < GROUP_RADIUS:             # <<<<<<<<<<<<<<
@@ -3622,7 +4127,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
       }
 
-      /* "rock_paper_scissors_core.pyx":119
+      /* "rock_paper_scissors_core.pyx":166
  * 
  *     for i in range(unit_count):
  *         if i != unit_index and types[i] == unit_type:             # <<<<<<<<<<<<<<
@@ -3632,7 +4137,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
     }
   }
 
-  /* "rock_paper_scissors_core.pyx":144
+  /* "rock_paper_scissors_core.pyx":204
  * 
  *     # Apply separation if any neighbors are too close
  *     if sep_count > 0:             # <<<<<<<<<<<<<<
@@ -3642,7 +4147,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   __pyx_t_10 = ((__pyx_v_sep_count > 0) != 0);
   if (__pyx_t_10) {
 
-    /* "rock_paper_scissors_core.pyx":145
+    /* "rock_paper_scissors_core.pyx":205
  *     # Apply separation if any neighbors are too close
  *     if sep_count > 0:
  *         vx += sep_x * GROUP_SEPARATION             # <<<<<<<<<<<<<<
@@ -3651,7 +4156,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_vx = (__pyx_v_vx + (__pyx_v_sep_x * __pyx_v_24rock_paper_scissors_core_GROUP_SEPARATION));
 
-    /* "rock_paper_scissors_core.pyx":146
+    /* "rock_paper_scissors_core.pyx":206
  *     if sep_count > 0:
  *         vx += sep_x * GROUP_SEPARATION
  *         vy += sep_y * GROUP_SEPARATION             # <<<<<<<<<<<<<<
@@ -3660,7 +4165,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_vy = (__pyx_v_vy + (__pyx_v_sep_y * __pyx_v_24rock_paper_scissors_core_GROUP_SEPARATION));
 
-    /* "rock_paper_scissors_core.pyx":144
+    /* "rock_paper_scissors_core.pyx":204
  * 
  *     # Apply separation if any neighbors are too close
  *     if sep_count > 0:             # <<<<<<<<<<<<<<
@@ -3669,7 +4174,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   }
 
-  /* "rock_paper_scissors_core.pyx":149
+  /* "rock_paper_scissors_core.pyx":209
  * 
  *     # Apply cohesion if there are group members
  *     if group_count > 0:             # <<<<<<<<<<<<<<
@@ -3679,7 +4184,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   __pyx_t_10 = ((__pyx_v_group_count > 0) != 0);
   if (__pyx_t_10) {
 
-    /* "rock_paper_scissors_core.pyx":150
+    /* "rock_paper_scissors_core.pyx":210
  *     # Apply cohesion if there are group members
  *     if group_count > 0:
  *         center_x /= group_count             # <<<<<<<<<<<<<<
@@ -3688,7 +4193,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_center_x = (__pyx_v_center_x / __pyx_v_group_count);
 
-    /* "rock_paper_scissors_core.pyx":151
+    /* "rock_paper_scissors_core.pyx":211
  *     if group_count > 0:
  *         center_x /= group_count
  *         center_y /= group_count             # <<<<<<<<<<<<<<
@@ -3697,7 +4202,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_center_y = (__pyx_v_center_y / __pyx_v_group_count);
 
-    /* "rock_paper_scissors_core.pyx":154
+    /* "rock_paper_scissors_core.pyx":214
  * 
  *         # Only apply cohesion if not too close to center of mass
  *         dx = center_x - unit_x             # <<<<<<<<<<<<<<
@@ -3706,7 +4211,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_dx = (__pyx_v_center_x - __pyx_v_unit_x);
 
-    /* "rock_paper_scissors_core.pyx":155
+    /* "rock_paper_scissors_core.pyx":215
  *         # Only apply cohesion if not too close to center of mass
  *         dx = center_x - unit_x
  *         dy = center_y - unit_y             # <<<<<<<<<<<<<<
@@ -3715,7 +4220,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_dy = (__pyx_v_center_y - __pyx_v_unit_y);
 
-    /* "rock_paper_scissors_core.pyx":156
+    /* "rock_paper_scissors_core.pyx":216
  *         dx = center_x - unit_x
  *         dy = center_y - unit_y
  *         dist = hypot(dx, dy)             # <<<<<<<<<<<<<<
@@ -3724,7 +4229,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_dist = hypot(__pyx_v_dx, __pyx_v_dy);
 
-    /* "rock_paper_scissors_core.pyx":158
+    /* "rock_paper_scissors_core.pyx":218
  *         dist = hypot(dx, dy)
  * 
  *         if dist > GROUP_MIN_DISTANCE:             # <<<<<<<<<<<<<<
@@ -3734,7 +4239,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
     __pyx_t_10 = ((__pyx_v_dist > __pyx_v_24rock_paper_scissors_core_GROUP_MIN_DISTANCE) != 0);
     if (__pyx_t_10) {
 
-      /* "rock_paper_scissors_core.pyx":159
+      /* "rock_paper_scissors_core.pyx":219
  * 
  *         if dist > GROUP_MIN_DISTANCE:
  *             vx += (dx / dist) * GROUP_COHESION             # <<<<<<<<<<<<<<
@@ -3743,7 +4248,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
       __pyx_v_vx = (__pyx_v_vx + ((__pyx_v_dx / __pyx_v_dist) * __pyx_v_24rock_paper_scissors_core_GROUP_COHESION));
 
-      /* "rock_paper_scissors_core.pyx":160
+      /* "rock_paper_scissors_core.pyx":220
  *         if dist > GROUP_MIN_DISTANCE:
  *             vx += (dx / dist) * GROUP_COHESION
  *             vy += (dy / dist) * GROUP_COHESION             # <<<<<<<<<<<<<<
@@ -3752,7 +4257,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
       __pyx_v_vy = (__pyx_v_vy + ((__pyx_v_dy / __pyx_v_dist) * __pyx_v_24rock_paper_scissors_core_GROUP_COHESION));
 
-      /* "rock_paper_scissors_core.pyx":158
+      /* "rock_paper_scissors_core.pyx":218
  *         dist = hypot(dx, dy)
  * 
  *         if dist > GROUP_MIN_DISTANCE:             # <<<<<<<<<<<<<<
@@ -3761,7 +4266,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     }
 
-    /* "rock_paper_scissors_core.pyx":163
+    /* "rock_paper_scissors_core.pyx":223
  * 
  *         # Apply alignment
  *         avg_vx /= group_count             # <<<<<<<<<<<<<<
@@ -3770,7 +4275,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_avg_vx = (__pyx_v_avg_vx / __pyx_v_group_count);
 
-    /* "rock_paper_scissors_core.pyx":164
+    /* "rock_paper_scissors_core.pyx":224
  *         # Apply alignment
  *         avg_vx /= group_count
  *         avg_vy /= group_count             # <<<<<<<<<<<<<<
@@ -3779,7 +4284,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_avg_vy = (__pyx_v_avg_vy / __pyx_v_group_count);
 
-    /* "rock_paper_scissors_core.pyx":165
+    /* "rock_paper_scissors_core.pyx":225
  *         avg_vx /= group_count
  *         avg_vy /= group_count
  *         vx += avg_vx * GROUP_ALIGNMENT             # <<<<<<<<<<<<<<
@@ -3788,16 +4293,16 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_vx = (__pyx_v_vx + (__pyx_v_avg_vx * __pyx_v_24rock_paper_scissors_core_GROUP_ALIGNMENT));
 
-    /* "rock_paper_scissors_core.pyx":166
+    /* "rock_paper_scissors_core.pyx":226
  *         avg_vy /= group_count
  *         vx += avg_vx * GROUP_ALIGNMENT
  *         vy += avg_vy * GROUP_ALIGNMENT             # <<<<<<<<<<<<<<
  * 
- *     # Center attraction to prevent edge clustering
+ *         # We've removed center attraction force since we have cyclic boundaries now
  */
     __pyx_v_vy = (__pyx_v_vy + (__pyx_v_avg_vy * __pyx_v_24rock_paper_scissors_core_GROUP_ALIGNMENT));
 
-    /* "rock_paper_scissors_core.pyx":149
+    /* "rock_paper_scissors_core.pyx":209
  * 
  *     # Apply cohesion if there are group members
  *     if group_count > 0:             # <<<<<<<<<<<<<<
@@ -3806,99 +4311,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   }
 
-  /* "rock_paper_scissors_core.pyx":169
- * 
- *     # Center attraction to prevent edge clustering
- *     dx = WIDTH / 2 - unit_x             # <<<<<<<<<<<<<<
- *     dy = HEIGHT / 2 - unit_y
- *     dist = hypot(dx, dy)
- */
-  __pyx_v_dx = ((((long)__pyx_v_24rock_paper_scissors_core_WIDTH) / 2) - __pyx_v_unit_x);
-
-  /* "rock_paper_scissors_core.pyx":170
- *     # Center attraction to prevent edge clustering
- *     dx = WIDTH / 2 - unit_x
- *     dy = HEIGHT / 2 - unit_y             # <<<<<<<<<<<<<<
- *     dist = hypot(dx, dy)
- * 
- */
-  __pyx_v_dy = ((((long)__pyx_v_24rock_paper_scissors_core_HEIGHT) / 2) - __pyx_v_unit_y);
-
-  /* "rock_paper_scissors_core.pyx":171
- *     dx = WIDTH / 2 - unit_x
- *     dy = HEIGHT / 2 - unit_y
- *     dist = hypot(dx, dy)             # <<<<<<<<<<<<<<
- * 
- *     if dist > WIDTH / 4:  # Only apply when far from center
- */
-  __pyx_v_dist = hypot(__pyx_v_dx, __pyx_v_dy);
-
-  /* "rock_paper_scissors_core.pyx":173
- *     dist = hypot(dx, dy)
- * 
- *     if dist > WIDTH / 4:  # Only apply when far from center             # <<<<<<<<<<<<<<
- *         strength = CENTER_FORCE * (dist / (WIDTH/2))
- *         if dist > 0:
- */
-  __pyx_t_10 = ((__pyx_v_dist > (((long)__pyx_v_24rock_paper_scissors_core_WIDTH) / 4)) != 0);
-  if (__pyx_t_10) {
-
-    /* "rock_paper_scissors_core.pyx":174
- * 
- *     if dist > WIDTH / 4:  # Only apply when far from center
- *         strength = CENTER_FORCE * (dist / (WIDTH/2))             # <<<<<<<<<<<<<<
- *         if dist > 0:
- *             vx += (dx / dist) * strength
- */
-    __pyx_v_strength = (__pyx_v_24rock_paper_scissors_core_CENTER_FORCE * (__pyx_v_dist / ((double)(((long)__pyx_v_24rock_paper_scissors_core_WIDTH) / 2))));
-
-    /* "rock_paper_scissors_core.pyx":175
- *     if dist > WIDTH / 4:  # Only apply when far from center
- *         strength = CENTER_FORCE * (dist / (WIDTH/2))
- *         if dist > 0:             # <<<<<<<<<<<<<<
- *             vx += (dx / dist) * strength
- *             vy += (dy / dist) * strength
- */
-    __pyx_t_10 = ((__pyx_v_dist > 0.0) != 0);
-    if (__pyx_t_10) {
-
-      /* "rock_paper_scissors_core.pyx":176
- *         strength = CENTER_FORCE * (dist / (WIDTH/2))
- *         if dist > 0:
- *             vx += (dx / dist) * strength             # <<<<<<<<<<<<<<
- *             vy += (dy / dist) * strength
- * 
- */
-      __pyx_v_vx = (__pyx_v_vx + ((__pyx_v_dx / __pyx_v_dist) * __pyx_v_strength));
-
-      /* "rock_paper_scissors_core.pyx":177
- *         if dist > 0:
- *             vx += (dx / dist) * strength
- *             vy += (dy / dist) * strength             # <<<<<<<<<<<<<<
- * 
- *     # Add random movement
- */
-      __pyx_v_vy = (__pyx_v_vy + ((__pyx_v_dy / __pyx_v_dist) * __pyx_v_strength));
-
-      /* "rock_paper_scissors_core.pyx":175
- *     if dist > WIDTH / 4:  # Only apply when far from center
- *         strength = CENTER_FORCE * (dist / (WIDTH/2))
- *         if dist > 0:             # <<<<<<<<<<<<<<
- *             vx += (dx / dist) * strength
- *             vy += (dy / dist) * strength
- */
-    }
-
-    /* "rock_paper_scissors_core.pyx":173
- *     dist = hypot(dx, dy)
- * 
- *     if dist > WIDTH / 4:  # Only apply when far from center             # <<<<<<<<<<<<<<
- *         strength = CENTER_FORCE * (dist / (WIDTH/2))
- *         if dist > 0:
- */
-  }
-
-  /* "rock_paper_scissors_core.pyx":180
+  /* "rock_paper_scissors_core.pyx":232
  * 
  *     # Add random movement
  *     vx += (rand_double() - 0.5) * RANDOM_MOVEMENT             # <<<<<<<<<<<<<<
@@ -3907,7 +4320,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_vx = (__pyx_v_vx + ((__pyx_f_24rock_paper_scissors_core_rand_double() - 0.5) * __pyx_v_24rock_paper_scissors_core_RANDOM_MOVEMENT));
 
-  /* "rock_paper_scissors_core.pyx":181
+  /* "rock_paper_scissors_core.pyx":233
  *     # Add random movement
  *     vx += (rand_double() - 0.5) * RANDOM_MOVEMENT
  *     vy += (rand_double() - 0.5) * RANDOM_MOVEMENT             # <<<<<<<<<<<<<<
@@ -3916,7 +4329,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_vy = (__pyx_v_vy + ((__pyx_f_24rock_paper_scissors_core_rand_double() - 0.5) * __pyx_v_24rock_paper_scissors_core_RANDOM_MOVEMENT));
 
-  /* "rock_paper_scissors_core.pyx":184
+  /* "rock_paper_scissors_core.pyx":236
  * 
  *     # --- Global separation: force all units to avoid overlapping ---
  *     cdef double strong_sep_x = 0.0             # <<<<<<<<<<<<<<
@@ -3925,7 +4338,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_strong_sep_x = 0.0;
 
-  /* "rock_paper_scissors_core.pyx":185
+  /* "rock_paper_scissors_core.pyx":237
  *     # --- Global separation: force all units to avoid overlapping ---
  *     cdef double strong_sep_x = 0.0
  *     cdef double strong_sep_y = 0.0             # <<<<<<<<<<<<<<
@@ -3934,7 +4347,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_strong_sep_y = 0.0;
 
-  /* "rock_paper_scissors_core.pyx":188
+  /* "rock_paper_scissors_core.pyx":240
  *     cdef double force
  * 
  *     for i in range(unit_count):             # <<<<<<<<<<<<<<
@@ -3946,7 +4359,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "rock_paper_scissors_core.pyx":189
+    /* "rock_paper_scissors_core.pyx":241
  * 
  *     for i in range(unit_count):
  *         if i != unit_index:             # <<<<<<<<<<<<<<
@@ -3956,38 +4369,154 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
     __pyx_t_10 = ((__pyx_v_i != __pyx_v_unit_index) != 0);
     if (__pyx_t_10) {
 
-      /* "rock_paper_scissors_core.pyx":190
+      /* "rock_paper_scissors_core.pyx":242
  *     for i in range(unit_count):
  *         if i != unit_index:
  *             dx = unit_x - positions[i, 0]             # <<<<<<<<<<<<<<
  *             dy = unit_y - positions[i, 1]
- *             dist = hypot(dx, dy)
+ * 
  */
       __pyx_t_1 = __pyx_v_i;
       __pyx_t_2 = 0;
       __pyx_v_dx = (__pyx_v_unit_x - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_1 * __pyx_v_positions.strides[0]) ) + __pyx_t_2 * __pyx_v_positions.strides[1]) ))));
 
-      /* "rock_paper_scissors_core.pyx":191
+      /* "rock_paper_scissors_core.pyx":243
  *         if i != unit_index:
  *             dx = unit_x - positions[i, 0]
  *             dy = unit_y - positions[i, 1]             # <<<<<<<<<<<<<<
- *             dist = hypot(dx, dy)
  * 
+ *             # Check for wrap-around shorter path in x-direction
  */
       __pyx_t_2 = __pyx_v_i;
       __pyx_t_1 = 1;
       __pyx_v_dy = (__pyx_v_unit_y - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_2 * __pyx_v_positions.strides[0]) ) + __pyx_t_1 * __pyx_v_positions.strides[1]) ))));
 
-      /* "rock_paper_scissors_core.pyx":192
- *             dx = unit_x - positions[i, 0]
- *             dy = unit_y - positions[i, 1]
+      /* "rock_paper_scissors_core.pyx":246
+ * 
+ *             # Check for wrap-around shorter path in x-direction
+ *             if dx > WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:
+ */
+      __pyx_t_10 = ((__pyx_v_dx > (((long)__pyx_v_24rock_paper_scissors_core_WIDTH) / 2)) != 0);
+      if (__pyx_t_10) {
+
+        /* "rock_paper_scissors_core.pyx":247
+ *             # Check for wrap-around shorter path in x-direction
+ *             if dx > WIDTH / 2:
+ *                 dx = dx - WIDTH             # <<<<<<<<<<<<<<
+ *             elif dx < -WIDTH / 2:
+ *                 dx = dx + WIDTH
+ */
+        __pyx_v_dx = (__pyx_v_dx - __pyx_v_24rock_paper_scissors_core_WIDTH);
+
+        /* "rock_paper_scissors_core.pyx":246
+ * 
+ *             # Check for wrap-around shorter path in x-direction
+ *             if dx > WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:
+ */
+        goto __pyx_L32;
+      }
+
+      /* "rock_paper_scissors_core.pyx":248
+ *             if dx > WIDTH / 2:
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx + WIDTH
+ * 
+ */
+      __pyx_t_10 = ((__pyx_v_dx < (((long)(-__pyx_v_24rock_paper_scissors_core_WIDTH)) / 2)) != 0);
+      if (__pyx_t_10) {
+
+        /* "rock_paper_scissors_core.pyx":249
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:
+ *                 dx = dx + WIDTH             # <<<<<<<<<<<<<<
+ * 
+ *             # Check for wrap-around shorter path in y-direction
+ */
+        __pyx_v_dx = (__pyx_v_dx + __pyx_v_24rock_paper_scissors_core_WIDTH);
+
+        /* "rock_paper_scissors_core.pyx":248
+ *             if dx > WIDTH / 2:
+ *                 dx = dx - WIDTH
+ *             elif dx < -WIDTH / 2:             # <<<<<<<<<<<<<<
+ *                 dx = dx + WIDTH
+ * 
+ */
+      }
+      __pyx_L32:;
+
+      /* "rock_paper_scissors_core.pyx":252
+ * 
+ *             # Check for wrap-around shorter path in y-direction
+ *             if dy > HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:
+ */
+      __pyx_t_10 = ((__pyx_v_dy > (((long)__pyx_v_24rock_paper_scissors_core_HEIGHT) / 2)) != 0);
+      if (__pyx_t_10) {
+
+        /* "rock_paper_scissors_core.pyx":253
+ *             # Check for wrap-around shorter path in y-direction
+ *             if dy > HEIGHT / 2:
+ *                 dy = dy - HEIGHT             # <<<<<<<<<<<<<<
+ *             elif dy < -HEIGHT / 2:
+ *                 dy = dy + HEIGHT
+ */
+        __pyx_v_dy = (__pyx_v_dy - __pyx_v_24rock_paper_scissors_core_HEIGHT);
+
+        /* "rock_paper_scissors_core.pyx":252
+ * 
+ *             # Check for wrap-around shorter path in y-direction
+ *             if dy > HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:
+ */
+        goto __pyx_L33;
+      }
+
+      /* "rock_paper_scissors_core.pyx":254
+ *             if dy > HEIGHT / 2:
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy + HEIGHT
+ * 
+ */
+      __pyx_t_10 = ((__pyx_v_dy < (((long)(-__pyx_v_24rock_paper_scissors_core_HEIGHT)) / 2)) != 0);
+      if (__pyx_t_10) {
+
+        /* "rock_paper_scissors_core.pyx":255
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:
+ *                 dy = dy + HEIGHT             # <<<<<<<<<<<<<<
+ * 
+ *             dist = hypot(dx, dy)
+ */
+        __pyx_v_dy = (__pyx_v_dy + __pyx_v_24rock_paper_scissors_core_HEIGHT);
+
+        /* "rock_paper_scissors_core.pyx":254
+ *             if dy > HEIGHT / 2:
+ *                 dy = dy - HEIGHT
+ *             elif dy < -HEIGHT / 2:             # <<<<<<<<<<<<<<
+ *                 dy = dy + HEIGHT
+ * 
+ */
+      }
+      __pyx_L33:;
+
+      /* "rock_paper_scissors_core.pyx":257
+ *                 dy = dy + HEIGHT
+ * 
  *             dist = hypot(dx, dy)             # <<<<<<<<<<<<<<
  * 
  *             if dist < MIN_DISTANCE/1.05 and dist > 0:
  */
       __pyx_v_dist = hypot(__pyx_v_dx, __pyx_v_dy);
 
-      /* "rock_paper_scissors_core.pyx":194
+      /* "rock_paper_scissors_core.pyx":259
  *             dist = hypot(dx, dy)
  * 
  *             if dist < MIN_DISTANCE/1.05 and dist > 0:             # <<<<<<<<<<<<<<
@@ -3998,14 +4527,14 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
       if (__pyx_t_3) {
       } else {
         __pyx_t_10 = __pyx_t_3;
-        goto __pyx_L29_bool_binop_done;
+        goto __pyx_L35_bool_binop_done;
       }
       __pyx_t_3 = ((__pyx_v_dist > 0.0) != 0);
       __pyx_t_10 = __pyx_t_3;
-      __pyx_L29_bool_binop_done:;
+      __pyx_L35_bool_binop_done:;
       if (__pyx_t_10) {
 
-        /* "rock_paper_scissors_core.pyx":196
+        /* "rock_paper_scissors_core.pyx":261
  *             if dist < MIN_DISTANCE/1.05 and dist > 0:
  *                 # Strong separation force
  *                 force = 20.0 * (MIN_DISTANCE - dist) / MIN_DISTANCE             # <<<<<<<<<<<<<<
@@ -4014,7 +4543,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
         __pyx_v_force = ((20.0 * (__pyx_v_24rock_paper_scissors_core_MIN_DISTANCE - __pyx_v_dist)) / __pyx_v_24rock_paper_scissors_core_MIN_DISTANCE);
 
-        /* "rock_paper_scissors_core.pyx":197
+        /* "rock_paper_scissors_core.pyx":262
  *                 # Strong separation force
  *                 force = 20.0 * (MIN_DISTANCE - dist) / MIN_DISTANCE
  *                 strong_sep_x += (dx / dist) * force             # <<<<<<<<<<<<<<
@@ -4023,7 +4552,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
         __pyx_v_strong_sep_x = (__pyx_v_strong_sep_x + ((__pyx_v_dx / __pyx_v_dist) * __pyx_v_force));
 
-        /* "rock_paper_scissors_core.pyx":198
+        /* "rock_paper_scissors_core.pyx":263
  *                 force = 20.0 * (MIN_DISTANCE - dist) / MIN_DISTANCE
  *                 strong_sep_x += (dx / dist) * force
  *                 strong_sep_y += (dy / dist) * force             # <<<<<<<<<<<<<<
@@ -4032,7 +4561,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
         __pyx_v_strong_sep_y = (__pyx_v_strong_sep_y + ((__pyx_v_dy / __pyx_v_dist) * __pyx_v_force));
 
-        /* "rock_paper_scissors_core.pyx":194
+        /* "rock_paper_scissors_core.pyx":259
  *             dist = hypot(dx, dy)
  * 
  *             if dist < MIN_DISTANCE/1.05 and dist > 0:             # <<<<<<<<<<<<<<
@@ -4041,7 +4570,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
       }
 
-      /* "rock_paper_scissors_core.pyx":189
+      /* "rock_paper_scissors_core.pyx":241
  * 
  *     for i in range(unit_count):
  *         if i != unit_index:             # <<<<<<<<<<<<<<
@@ -4051,7 +4580,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
     }
   }
 
-  /* "rock_paper_scissors_core.pyx":200
+  /* "rock_paper_scissors_core.pyx":265
  *                 strong_sep_y += (dy / dist) * force
  * 
  *     vx += strong_sep_x             # <<<<<<<<<<<<<<
@@ -4060,7 +4589,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_vx = (__pyx_v_vx + __pyx_v_strong_sep_x);
 
-  /* "rock_paper_scissors_core.pyx":201
+  /* "rock_paper_scissors_core.pyx":266
  * 
  *     vx += strong_sep_x
  *     vy += strong_sep_y             # <<<<<<<<<<<<<<
@@ -4069,7 +4598,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_vy = (__pyx_v_vy + __pyx_v_strong_sep_y);
 
-  /* "rock_paper_scissors_core.pyx":204
+  /* "rock_paper_scissors_core.pyx":269
  * 
  *     # Normalize velocity if too high
  *     cdef double speed = hypot(vx, vy)             # <<<<<<<<<<<<<<
@@ -4078,7 +4607,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   __pyx_v_speed = hypot(__pyx_v_vx, __pyx_v_vy);
 
-  /* "rock_paper_scissors_core.pyx":205
+  /* "rock_paper_scissors_core.pyx":270
  *     # Normalize velocity if too high
  *     cdef double speed = hypot(vx, vy)
  *     if speed > UNIT_SPEED:             # <<<<<<<<<<<<<<
@@ -4088,7 +4617,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   __pyx_t_10 = ((__pyx_v_speed > __pyx_v_24rock_paper_scissors_core_UNIT_SPEED) != 0);
   if (__pyx_t_10) {
 
-    /* "rock_paper_scissors_core.pyx":206
+    /* "rock_paper_scissors_core.pyx":271
  *     cdef double speed = hypot(vx, vy)
  *     if speed > UNIT_SPEED:
  *         vx = (vx / speed) * UNIT_SPEED             # <<<<<<<<<<<<<<
@@ -4097,7 +4626,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_vx = ((__pyx_v_vx / __pyx_v_speed) * __pyx_v_24rock_paper_scissors_core_UNIT_SPEED);
 
-    /* "rock_paper_scissors_core.pyx":207
+    /* "rock_paper_scissors_core.pyx":272
  *     if speed > UNIT_SPEED:
  *         vx = (vx / speed) * UNIT_SPEED
  *         vy = (vy / speed) * UNIT_SPEED             # <<<<<<<<<<<<<<
@@ -4106,7 +4635,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
     __pyx_v_vy = ((__pyx_v_vy / __pyx_v_speed) * __pyx_v_24rock_paper_scissors_core_UNIT_SPEED);
 
-    /* "rock_paper_scissors_core.pyx":205
+    /* "rock_paper_scissors_core.pyx":270
  *     # Normalize velocity if too high
  *     cdef double speed = hypot(vx, vy)
  *     if speed > UNIT_SPEED:             # <<<<<<<<<<<<<<
@@ -4115,7 +4644,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
  */
   }
 
-  /* "rock_paper_scissors_core.pyx":210
+  /* "rock_paper_scissors_core.pyx":275
  * 
  *     # Store the calculated velocity
  *     velocities[unit_index, 0] = vx             # <<<<<<<<<<<<<<
@@ -4126,7 +4655,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   __pyx_t_2 = 0;
   *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_velocities.data + __pyx_t_1 * __pyx_v_velocities.strides[0]) ) + __pyx_t_2 * __pyx_v_velocities.strides[1]) )) = __pyx_v_vx;
 
-  /* "rock_paper_scissors_core.pyx":211
+  /* "rock_paper_scissors_core.pyx":276
  *     # Store the calculated velocity
  *     velocities[unit_index, 0] = vx
  *     velocities[unit_index, 1] = vy             # <<<<<<<<<<<<<<
@@ -4137,7 +4666,7 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   __pyx_t_1 = 1;
   *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_velocities.data + __pyx_t_2 * __pyx_v_velocities.strides[0]) ) + __pyx_t_1 * __pyx_v_velocities.strides[1]) )) = __pyx_v_vy;
 
-  /* "rock_paper_scissors_core.pyx":65
+  /* "rock_paper_scissors_core.pyx":84
  *     return target_index
  * 
  * cdef void calculate_movement(int unit_index, double[:, :] positions, int[:] types,             # <<<<<<<<<<<<<<
@@ -4148,11 +4677,11 @@ static void __pyx_f_24rock_paper_scissors_core_calculate_movement(int __pyx_v_un
   /* function exit code */
 }
 
-/* "rock_paper_scissors_core.pyx":213
+/* "rock_paper_scissors_core.pyx":278
  *     velocities[unit_index, 1] = vy
  * 
  * cdef void apply_movement(int unit_count, double[:, :] positions, double[:, :] velocities) nogil:             # <<<<<<<<<<<<<<
- *     """Apply calculated velocities to positions and handle boundaries"""
+ *     """Apply calculated velocities to positions and handle cyclic boundaries"""
  *     cdef int i
  */
 
@@ -4169,7 +4698,7 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
   Py_ssize_t __pyx_t_5;
   int __pyx_t_6;
 
-  /* "rock_paper_scissors_core.pyx":218
+  /* "rock_paper_scissors_core.pyx":283
  *     cdef double x, y, vx, vy
  * 
  *     for i in range(unit_count):             # <<<<<<<<<<<<<<
@@ -4181,7 +4710,7 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "rock_paper_scissors_core.pyx":220
+    /* "rock_paper_scissors_core.pyx":285
  *     for i in range(unit_count):
  *         # Get current position and velocity
  *         x = positions[i, 0]             # <<<<<<<<<<<<<<
@@ -4192,7 +4721,7 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
     __pyx_t_5 = 0;
     __pyx_v_x = (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_4 * __pyx_v_positions.strides[0]) ) + __pyx_t_5 * __pyx_v_positions.strides[1]) )));
 
-    /* "rock_paper_scissors_core.pyx":221
+    /* "rock_paper_scissors_core.pyx":286
  *         # Get current position and velocity
  *         x = positions[i, 0]
  *         y = positions[i, 1]             # <<<<<<<<<<<<<<
@@ -4203,7 +4732,7 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
     __pyx_t_4 = 1;
     __pyx_v_y = (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_5 * __pyx_v_positions.strides[0]) ) + __pyx_t_4 * __pyx_v_positions.strides[1]) )));
 
-    /* "rock_paper_scissors_core.pyx":222
+    /* "rock_paper_scissors_core.pyx":287
  *         x = positions[i, 0]
  *         y = positions[i, 1]
  *         vx = velocities[i, 0]             # <<<<<<<<<<<<<<
@@ -4214,7 +4743,7 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
     __pyx_t_5 = 0;
     __pyx_v_vx = (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_velocities.data + __pyx_t_4 * __pyx_v_velocities.strides[0]) ) + __pyx_t_5 * __pyx_v_velocities.strides[1]) )));
 
-    /* "rock_paper_scissors_core.pyx":223
+    /* "rock_paper_scissors_core.pyx":288
  *         y = positions[i, 1]
  *         vx = velocities[i, 0]
  *         vy = velocities[i, 1]             # <<<<<<<<<<<<<<
@@ -4225,7 +4754,7 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
     __pyx_t_4 = 1;
     __pyx_v_vy = (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_velocities.data + __pyx_t_5 * __pyx_v_velocities.strides[0]) ) + __pyx_t_4 * __pyx_v_velocities.strides[1]) )));
 
-    /* "rock_paper_scissors_core.pyx":226
+    /* "rock_paper_scissors_core.pyx":291
  * 
  *         # Apply movement
  *         x += vx             # <<<<<<<<<<<<<<
@@ -4234,168 +4763,132 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
  */
     __pyx_v_x = (__pyx_v_x + __pyx_v_vx);
 
-    /* "rock_paper_scissors_core.pyx":227
+    /* "rock_paper_scissors_core.pyx":292
  *         # Apply movement
  *         x += vx
  *         y += vy             # <<<<<<<<<<<<<<
  * 
- *         # Boundary handling with bounce
+ *         # Cyclic boundary handling - wrap around to the opposite side
  */
     __pyx_v_y = (__pyx_v_y + __pyx_v_vy);
 
-    /* "rock_paper_scissors_core.pyx":230
- * 
- *         # Boundary handling with bounce
- *         if x < 5:  # UNIT_RADIUS             # <<<<<<<<<<<<<<
- *             x = 5
- *             vx *= -0.5  # Bounce with energy loss
+    /* "rock_paper_scissors_core.pyx":296
+ *         # Cyclic boundary handling - wrap around to the opposite side
+ *         # For x-coordinate
+ *         if x < 0:             # <<<<<<<<<<<<<<
+ *             x += WIDTH  # Wrap to right side
+ *         elif x >= WIDTH:
  */
-    __pyx_t_6 = ((__pyx_v_x < 5.0) != 0);
+    __pyx_t_6 = ((__pyx_v_x < 0.0) != 0);
     if (__pyx_t_6) {
 
-      /* "rock_paper_scissors_core.pyx":231
- *         # Boundary handling with bounce
- *         if x < 5:  # UNIT_RADIUS
- *             x = 5             # <<<<<<<<<<<<<<
- *             vx *= -0.5  # Bounce with energy loss
- *         elif x > WIDTH - 5:
+      /* "rock_paper_scissors_core.pyx":297
+ *         # For x-coordinate
+ *         if x < 0:
+ *             x += WIDTH  # Wrap to right side             # <<<<<<<<<<<<<<
+ *         elif x >= WIDTH:
+ *             x -= WIDTH  # Wrap to left side
  */
-      __pyx_v_x = 5.0;
+      __pyx_v_x = (__pyx_v_x + __pyx_v_24rock_paper_scissors_core_WIDTH);
 
-      /* "rock_paper_scissors_core.pyx":232
- *         if x < 5:  # UNIT_RADIUS
- *             x = 5
- *             vx *= -0.5  # Bounce with energy loss             # <<<<<<<<<<<<<<
- *         elif x > WIDTH - 5:
- *             x = WIDTH - 5
- */
-      __pyx_v_vx = (__pyx_v_vx * -0.5);
-
-      /* "rock_paper_scissors_core.pyx":230
- * 
- *         # Boundary handling with bounce
- *         if x < 5:  # UNIT_RADIUS             # <<<<<<<<<<<<<<
- *             x = 5
- *             vx *= -0.5  # Bounce with energy loss
+      /* "rock_paper_scissors_core.pyx":296
+ *         # Cyclic boundary handling - wrap around to the opposite side
+ *         # For x-coordinate
+ *         if x < 0:             # <<<<<<<<<<<<<<
+ *             x += WIDTH  # Wrap to right side
+ *         elif x >= WIDTH:
  */
       goto __pyx_L5;
     }
 
-    /* "rock_paper_scissors_core.pyx":233
- *             x = 5
- *             vx *= -0.5  # Bounce with energy loss
- *         elif x > WIDTH - 5:             # <<<<<<<<<<<<<<
- *             x = WIDTH - 5
- *             vx *= -0.5
+    /* "rock_paper_scissors_core.pyx":298
+ *         if x < 0:
+ *             x += WIDTH  # Wrap to right side
+ *         elif x >= WIDTH:             # <<<<<<<<<<<<<<
+ *             x -= WIDTH  # Wrap to left side
+ * 
  */
-    __pyx_t_6 = ((__pyx_v_x > (__pyx_v_24rock_paper_scissors_core_WIDTH - 5)) != 0);
+    __pyx_t_6 = ((__pyx_v_x >= __pyx_v_24rock_paper_scissors_core_WIDTH) != 0);
     if (__pyx_t_6) {
 
-      /* "rock_paper_scissors_core.pyx":234
- *             vx *= -0.5  # Bounce with energy loss
- *         elif x > WIDTH - 5:
- *             x = WIDTH - 5             # <<<<<<<<<<<<<<
- *             vx *= -0.5
+      /* "rock_paper_scissors_core.pyx":299
+ *             x += WIDTH  # Wrap to right side
+ *         elif x >= WIDTH:
+ *             x -= WIDTH  # Wrap to left side             # <<<<<<<<<<<<<<
  * 
+ *         # For y-coordinate
  */
-      __pyx_v_x = (__pyx_v_24rock_paper_scissors_core_WIDTH - 5);
+      __pyx_v_x = (__pyx_v_x - __pyx_v_24rock_paper_scissors_core_WIDTH);
 
-      /* "rock_paper_scissors_core.pyx":235
- *         elif x > WIDTH - 5:
- *             x = WIDTH - 5
- *             vx *= -0.5             # <<<<<<<<<<<<<<
+      /* "rock_paper_scissors_core.pyx":298
+ *         if x < 0:
+ *             x += WIDTH  # Wrap to right side
+ *         elif x >= WIDTH:             # <<<<<<<<<<<<<<
+ *             x -= WIDTH  # Wrap to left side
  * 
- *         if y < 5:
- */
-      __pyx_v_vx = (__pyx_v_vx * -0.5);
-
-      /* "rock_paper_scissors_core.pyx":233
- *             x = 5
- *             vx *= -0.5  # Bounce with energy loss
- *         elif x > WIDTH - 5:             # <<<<<<<<<<<<<<
- *             x = WIDTH - 5
- *             vx *= -0.5
  */
     }
     __pyx_L5:;
 
-    /* "rock_paper_scissors_core.pyx":237
- *             vx *= -0.5
+    /* "rock_paper_scissors_core.pyx":302
  * 
- *         if y < 5:             # <<<<<<<<<<<<<<
- *             y = 5
- *             vy *= -0.5
+ *         # For y-coordinate
+ *         if y < 0:             # <<<<<<<<<<<<<<
+ *             y += HEIGHT  # Wrap to bottom
+ *         elif y >= HEIGHT:
  */
-    __pyx_t_6 = ((__pyx_v_y < 5.0) != 0);
+    __pyx_t_6 = ((__pyx_v_y < 0.0) != 0);
     if (__pyx_t_6) {
 
-      /* "rock_paper_scissors_core.pyx":238
- * 
- *         if y < 5:
- *             y = 5             # <<<<<<<<<<<<<<
- *             vy *= -0.5
- *         elif y > HEIGHT - 5:
+      /* "rock_paper_scissors_core.pyx":303
+ *         # For y-coordinate
+ *         if y < 0:
+ *             y += HEIGHT  # Wrap to bottom             # <<<<<<<<<<<<<<
+ *         elif y >= HEIGHT:
+ *             y -= HEIGHT  # Wrap to top
  */
-      __pyx_v_y = 5.0;
+      __pyx_v_y = (__pyx_v_y + __pyx_v_24rock_paper_scissors_core_HEIGHT);
 
-      /* "rock_paper_scissors_core.pyx":239
- *         if y < 5:
- *             y = 5
- *             vy *= -0.5             # <<<<<<<<<<<<<<
- *         elif y > HEIGHT - 5:
- *             y = HEIGHT - 5
- */
-      __pyx_v_vy = (__pyx_v_vy * -0.5);
-
-      /* "rock_paper_scissors_core.pyx":237
- *             vx *= -0.5
+      /* "rock_paper_scissors_core.pyx":302
  * 
- *         if y < 5:             # <<<<<<<<<<<<<<
- *             y = 5
- *             vy *= -0.5
+ *         # For y-coordinate
+ *         if y < 0:             # <<<<<<<<<<<<<<
+ *             y += HEIGHT  # Wrap to bottom
+ *         elif y >= HEIGHT:
  */
       goto __pyx_L6;
     }
 
-    /* "rock_paper_scissors_core.pyx":240
- *             y = 5
- *             vy *= -0.5
- *         elif y > HEIGHT - 5:             # <<<<<<<<<<<<<<
- *             y = HEIGHT - 5
- *             vy *= -0.5
- */
-    __pyx_t_6 = ((__pyx_v_y > (__pyx_v_24rock_paper_scissors_core_HEIGHT - 5)) != 0);
-    if (__pyx_t_6) {
-
-      /* "rock_paper_scissors_core.pyx":241
- *             vy *= -0.5
- *         elif y > HEIGHT - 5:
- *             y = HEIGHT - 5             # <<<<<<<<<<<<<<
- *             vy *= -0.5
+    /* "rock_paper_scissors_core.pyx":304
+ *         if y < 0:
+ *             y += HEIGHT  # Wrap to bottom
+ *         elif y >= HEIGHT:             # <<<<<<<<<<<<<<
+ *             y -= HEIGHT  # Wrap to top
  * 
  */
-      __pyx_v_y = (__pyx_v_24rock_paper_scissors_core_HEIGHT - 5);
+    __pyx_t_6 = ((__pyx_v_y >= __pyx_v_24rock_paper_scissors_core_HEIGHT) != 0);
+    if (__pyx_t_6) {
 
-      /* "rock_paper_scissors_core.pyx":242
- *         elif y > HEIGHT - 5:
- *             y = HEIGHT - 5
- *             vy *= -0.5             # <<<<<<<<<<<<<<
+      /* "rock_paper_scissors_core.pyx":305
+ *             y += HEIGHT  # Wrap to bottom
+ *         elif y >= HEIGHT:
+ *             y -= HEIGHT  # Wrap to top             # <<<<<<<<<<<<<<
  * 
  *         # Update position and velocity
  */
-      __pyx_v_vy = (__pyx_v_vy * -0.5);
+      __pyx_v_y = (__pyx_v_y - __pyx_v_24rock_paper_scissors_core_HEIGHT);
 
-      /* "rock_paper_scissors_core.pyx":240
- *             y = 5
- *             vy *= -0.5
- *         elif y > HEIGHT - 5:             # <<<<<<<<<<<<<<
- *             y = HEIGHT - 5
- *             vy *= -0.5
+      /* "rock_paper_scissors_core.pyx":304
+ *         if y < 0:
+ *             y += HEIGHT  # Wrap to bottom
+ *         elif y >= HEIGHT:             # <<<<<<<<<<<<<<
+ *             y -= HEIGHT  # Wrap to top
+ * 
  */
     }
     __pyx_L6:;
 
-    /* "rock_paper_scissors_core.pyx":245
+    /* "rock_paper_scissors_core.pyx":308
  * 
  *         # Update position and velocity
  *         positions[i, 0] = x             # <<<<<<<<<<<<<<
@@ -4406,7 +4899,7 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
     __pyx_t_5 = 0;
     *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_4 * __pyx_v_positions.strides[0]) ) + __pyx_t_5 * __pyx_v_positions.strides[1]) )) = __pyx_v_x;
 
-    /* "rock_paper_scissors_core.pyx":246
+    /* "rock_paper_scissors_core.pyx":309
  *         # Update position and velocity
  *         positions[i, 0] = x
  *         positions[i, 1] = y             # <<<<<<<<<<<<<<
@@ -4417,7 +4910,7 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
     __pyx_t_4 = 1;
     *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_5 * __pyx_v_positions.strides[0]) ) + __pyx_t_4 * __pyx_v_positions.strides[1]) )) = __pyx_v_y;
 
-    /* "rock_paper_scissors_core.pyx":247
+    /* "rock_paper_scissors_core.pyx":310
  *         positions[i, 0] = x
  *         positions[i, 1] = y
  *         velocities[i, 0] = vx             # <<<<<<<<<<<<<<
@@ -4428,7 +4921,7 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
     __pyx_t_5 = 0;
     *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_velocities.data + __pyx_t_4 * __pyx_v_velocities.strides[0]) ) + __pyx_t_5 * __pyx_v_velocities.strides[1]) )) = __pyx_v_vx;
 
-    /* "rock_paper_scissors_core.pyx":248
+    /* "rock_paper_scissors_core.pyx":311
  *         positions[i, 1] = y
  *         velocities[i, 0] = vx
  *         velocities[i, 1] = vy             # <<<<<<<<<<<<<<
@@ -4440,18 +4933,18 @@ static void __pyx_f_24rock_paper_scissors_core_apply_movement(int __pyx_v_unit_c
     *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_velocities.data + __pyx_t_5 * __pyx_v_velocities.strides[0]) ) + __pyx_t_4 * __pyx_v_velocities.strides[1]) )) = __pyx_v_vy;
   }
 
-  /* "rock_paper_scissors_core.pyx":213
+  /* "rock_paper_scissors_core.pyx":278
  *     velocities[unit_index, 1] = vy
  * 
  * cdef void apply_movement(int unit_count, double[:, :] positions, double[:, :] velocities) nogil:             # <<<<<<<<<<<<<<
- *     """Apply calculated velocities to positions and handle boundaries"""
+ *     """Apply calculated velocities to positions and handle cyclic boundaries"""
  *     cdef int i
  */
 
   /* function exit code */
 }
 
-/* "rock_paper_scissors_core.pyx":250
+/* "rock_paper_scissors_core.pyx":313
  *         velocities[i, 1] = vy
  * 
  * cdef void check_collisions(int unit_count, double[:, :] positions, int[:] types, int[:] new_types) nogil:             # <<<<<<<<<<<<<<
@@ -4481,7 +4974,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
   Py_ssize_t __pyx_t_15;
   Py_ssize_t __pyx_t_16;
 
-  /* "rock_paper_scissors_core.pyx":256
+  /* "rock_paper_scissors_core.pyx":319
  *     cdef double dist
  * 
  *     for i in range(unit_count):             # <<<<<<<<<<<<<<
@@ -4493,7 +4986,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "rock_paper_scissors_core.pyx":257
+    /* "rock_paper_scissors_core.pyx":320
  * 
  *     for i in range(unit_count):
  *         if new_types[i] < 0:  # Only check if not already changed             # <<<<<<<<<<<<<<
@@ -4504,7 +4997,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
     __pyx_t_5 = (((*((int *) ( /* dim=0 */ (__pyx_v_new_types.data + __pyx_t_4 * __pyx_v_new_types.strides[0]) ))) < 0) != 0);
     if (__pyx_t_5) {
 
-      /* "rock_paper_scissors_core.pyx":258
+      /* "rock_paper_scissors_core.pyx":321
  *     for i in range(unit_count):
  *         if new_types[i] < 0:  # Only check if not already changed
  *             predator_type = (types[i] + 1) % 3             # <<<<<<<<<<<<<<
@@ -4514,7 +5007,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
       __pyx_t_4 = __pyx_v_i;
       __pyx_v_predator_type = (((*((int *) ( /* dim=0 */ (__pyx_v_types.data + __pyx_t_4 * __pyx_v_types.strides[0]) ))) + 1) % 3);
 
-      /* "rock_paper_scissors_core.pyx":260
+      /* "rock_paper_scissors_core.pyx":323
  *             predator_type = (types[i] + 1) % 3
  * 
  *             for j in range(unit_count):             # <<<<<<<<<<<<<<
@@ -4526,7 +5019,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
       for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
         __pyx_v_j = __pyx_t_8;
 
-        /* "rock_paper_scissors_core.pyx":261
+        /* "rock_paper_scissors_core.pyx":324
  * 
  *             for j in range(unit_count):
  *                 if i != j and types[j] == predator_type:             # <<<<<<<<<<<<<<
@@ -4545,7 +5038,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
         __pyx_L9_bool_binop_done:;
         if (__pyx_t_5) {
 
-          /* "rock_paper_scissors_core.pyx":262
+          /* "rock_paper_scissors_core.pyx":325
  *             for j in range(unit_count):
  *                 if i != j and types[j] == predator_type:
  *                     dist = distance(positions[i, 0], positions[i, 1],             # <<<<<<<<<<<<<<
@@ -4557,7 +5050,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
           __pyx_t_11 = __pyx_v_i;
           __pyx_t_12 = 1;
 
-          /* "rock_paper_scissors_core.pyx":263
+          /* "rock_paper_scissors_core.pyx":326
  *                 if i != j and types[j] == predator_type:
  *                     dist = distance(positions[i, 0], positions[i, 1],
  *                                    positions[j, 0], positions[j, 1])             # <<<<<<<<<<<<<<
@@ -4569,7 +5062,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
           __pyx_t_15 = __pyx_v_j;
           __pyx_t_16 = 1;
 
-          /* "rock_paper_scissors_core.pyx":262
+          /* "rock_paper_scissors_core.pyx":325
  *             for j in range(unit_count):
  *                 if i != j and types[j] == predator_type:
  *                     dist = distance(positions[i, 0], positions[i, 1],             # <<<<<<<<<<<<<<
@@ -4578,7 +5071,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
  */
           __pyx_v_dist = __pyx_f_24rock_paper_scissors_core_distance((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_4 * __pyx_v_positions.strides[0]) ) + __pyx_t_10 * __pyx_v_positions.strides[1]) ))), (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_11 * __pyx_v_positions.strides[0]) ) + __pyx_t_12 * __pyx_v_positions.strides[1]) ))), (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_13 * __pyx_v_positions.strides[0]) ) + __pyx_t_14 * __pyx_v_positions.strides[1]) ))), (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_positions.data + __pyx_t_15 * __pyx_v_positions.strides[0]) ) + __pyx_t_16 * __pyx_v_positions.strides[1]) ))));
 
-          /* "rock_paper_scissors_core.pyx":265
+          /* "rock_paper_scissors_core.pyx":328
  *                                    positions[j, 0], positions[j, 1])
  * 
  *                     if dist < MIN_DISTANCE:             # <<<<<<<<<<<<<<
@@ -4588,7 +5081,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
           __pyx_t_5 = ((__pyx_v_dist < __pyx_v_24rock_paper_scissors_core_MIN_DISTANCE) != 0);
           if (__pyx_t_5) {
 
-            /* "rock_paper_scissors_core.pyx":267
+            /* "rock_paper_scissors_core.pyx":330
  *                     if dist < MIN_DISTANCE:
  *                         # Collision occurred, check if type should change
  *                         if rand_double() < COLLISION_CHANCE:             # <<<<<<<<<<<<<<
@@ -4598,7 +5091,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
             __pyx_t_5 = ((__pyx_f_24rock_paper_scissors_core_rand_double() < __pyx_v_24rock_paper_scissors_core_COLLISION_CHANCE) != 0);
             if (__pyx_t_5) {
 
-              /* "rock_paper_scissors_core.pyx":268
+              /* "rock_paper_scissors_core.pyx":331
  *                         # Collision occurred, check if type should change
  *                         if rand_double() < COLLISION_CHANCE:
  *                             new_types[i] = predator_type             # <<<<<<<<<<<<<<
@@ -4608,7 +5101,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
               __pyx_t_16 = __pyx_v_i;
               *((int *) ( /* dim=0 */ (__pyx_v_new_types.data + __pyx_t_16 * __pyx_v_new_types.strides[0]) )) = __pyx_v_predator_type;
 
-              /* "rock_paper_scissors_core.pyx":269
+              /* "rock_paper_scissors_core.pyx":332
  *                         if rand_double() < COLLISION_CHANCE:
  *                             new_types[i] = predator_type
  *                             break             # <<<<<<<<<<<<<<
@@ -4617,7 +5110,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
  */
               goto __pyx_L7_break;
 
-              /* "rock_paper_scissors_core.pyx":267
+              /* "rock_paper_scissors_core.pyx":330
  *                     if dist < MIN_DISTANCE:
  *                         # Collision occurred, check if type should change
  *                         if rand_double() < COLLISION_CHANCE:             # <<<<<<<<<<<<<<
@@ -4626,7 +5119,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
  */
             }
 
-            /* "rock_paper_scissors_core.pyx":265
+            /* "rock_paper_scissors_core.pyx":328
  *                                    positions[j, 0], positions[j, 1])
  * 
  *                     if dist < MIN_DISTANCE:             # <<<<<<<<<<<<<<
@@ -4635,7 +5128,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
  */
           }
 
-          /* "rock_paper_scissors_core.pyx":261
+          /* "rock_paper_scissors_core.pyx":324
  * 
  *             for j in range(unit_count):
  *                 if i != j and types[j] == predator_type:             # <<<<<<<<<<<<<<
@@ -4646,7 +5139,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
       }
       __pyx_L7_break:;
 
-      /* "rock_paper_scissors_core.pyx":257
+      /* "rock_paper_scissors_core.pyx":320
  * 
  *     for i in range(unit_count):
  *         if new_types[i] < 0:  # Only check if not already changed             # <<<<<<<<<<<<<<
@@ -4656,7 +5149,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
     }
   }
 
-  /* "rock_paper_scissors_core.pyx":250
+  /* "rock_paper_scissors_core.pyx":313
  *         velocities[i, 1] = vy
  * 
  * cdef void check_collisions(int unit_count, double[:, :] positions, int[:] types, int[:] new_types) nogil:             # <<<<<<<<<<<<<<
@@ -4667,7 +5160,7 @@ static void __pyx_f_24rock_paper_scissors_core_check_collisions(int __pyx_v_unit
   /* function exit code */
 }
 
-/* "rock_paper_scissors_core.pyx":272
+/* "rock_paper_scissors_core.pyx":335
  * 
  * # Python-accessible functions
  * def find_all_targets(np.ndarray[double, ndim=2] positions, np.ndarray[int, ndim=1] types):             # <<<<<<<<<<<<<<
@@ -4711,11 +5204,11 @@ static PyObject *__pyx_pw_24rock_paper_scissors_core_1find_all_targets(PyObject 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_types)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("find_all_targets", 1, 2, 2, 1); __PYX_ERR(0, 272, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("find_all_targets", 1, 2, 2, 1); __PYX_ERR(0, 335, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_all_targets") < 0)) __PYX_ERR(0, 272, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "find_all_targets") < 0)) __PYX_ERR(0, 335, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4728,14 +5221,14 @@ static PyObject *__pyx_pw_24rock_paper_scissors_core_1find_all_targets(PyObject 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("find_all_targets", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 272, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("find_all_targets", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 335, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("rock_paper_scissors_core.find_all_targets", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_positions), __pyx_ptype_5numpy_ndarray, 1, "positions", 0))) __PYX_ERR(0, 272, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_types), __pyx_ptype_5numpy_ndarray, 1, "types", 0))) __PYX_ERR(0, 272, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_positions), __pyx_ptype_5numpy_ndarray, 1, "positions", 0))) __PYX_ERR(0, 335, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_types), __pyx_ptype_5numpy_ndarray, 1, "types", 0))) __PYX_ERR(0, 335, __pyx_L1_error)
   __pyx_r = __pyx_pf_24rock_paper_scissors_core_find_all_targets(__pyx_self, __pyx_v_positions, __pyx_v_types);
 
   /* function exit code */
@@ -4794,16 +5287,16 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_find_all_targets(CYTHON_UNU
   __pyx_pybuffernd_types.rcbuffer = &__pyx_pybuffer_types;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_positions.rcbuffer->pybuffer, (PyObject*)__pyx_v_positions, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 272, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_positions.rcbuffer->pybuffer, (PyObject*)__pyx_v_positions, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 335, __pyx_L1_error)
   }
   __pyx_pybuffernd_positions.diminfo[0].strides = __pyx_pybuffernd_positions.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_positions.diminfo[0].shape = __pyx_pybuffernd_positions.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_positions.diminfo[1].strides = __pyx_pybuffernd_positions.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_positions.diminfo[1].shape = __pyx_pybuffernd_positions.rcbuffer->pybuffer.shape[1];
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_types.rcbuffer->pybuffer, (PyObject*)__pyx_v_types, &__Pyx_TypeInfo_int, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 272, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_types.rcbuffer->pybuffer, (PyObject*)__pyx_v_types, &__Pyx_TypeInfo_int, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 335, __pyx_L1_error)
   }
   __pyx_pybuffernd_types.diminfo[0].strides = __pyx_pybuffernd_types.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_types.diminfo[0].shape = __pyx_pybuffernd_types.rcbuffer->pybuffer.shape[0];
 
-  /* "rock_paper_scissors_core.pyx":274
+  /* "rock_paper_scissors_core.pyx":337
  * def find_all_targets(np.ndarray[double, ndim=2] positions, np.ndarray[int, ndim=1] types):
  *     """Find targets for all units"""
  *     cdef int unit_count = positions.shape[0]             # <<<<<<<<<<<<<<
@@ -4812,21 +5305,21 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_find_all_targets(CYTHON_UNU
  */
   __pyx_v_unit_count = (__pyx_v_positions->dimensions[0]);
 
-  /* "rock_paper_scissors_core.pyx":275
+  /* "rock_paper_scissors_core.pyx":338
  *     """Find targets for all units"""
  *     cdef int unit_count = positions.shape[0]
  *     cdef np.ndarray[int, ndim=1] targets = np.full(unit_count, -1, dtype=np.int32)             # <<<<<<<<<<<<<<
  *     cdef int i
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_full); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_full); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_unit_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_unit_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -4834,27 +5327,27 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_find_all_targets(CYTHON_UNU
   __Pyx_GIVEREF(__pyx_int_neg_1);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_int_neg_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 275, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 275, __pyx_L1_error)
+  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 338, __pyx_L1_error)
   __pyx_t_6 = ((PyArrayObject *)__pyx_t_5);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_targets.rcbuffer->pybuffer, (PyObject*)__pyx_t_6, &__Pyx_TypeInfo_int, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_targets = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_targets.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 275, __pyx_L1_error)
+      __PYX_ERR(0, 338, __pyx_L1_error)
     } else {__pyx_pybuffernd_targets.diminfo[0].strides = __pyx_pybuffernd_targets.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_targets.diminfo[0].shape = __pyx_pybuffernd_targets.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -4862,7 +5355,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_find_all_targets(CYTHON_UNU
   __pyx_v_targets = ((PyArrayObject *)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "rock_paper_scissors_core.pyx":278
+  /* "rock_paper_scissors_core.pyx":341
  *     cdef int i
  * 
  *     for i in range(unit_count):             # <<<<<<<<<<<<<<
@@ -4874,7 +5367,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_find_all_targets(CYTHON_UNU
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "rock_paper_scissors_core.pyx":279
+    /* "rock_paper_scissors_core.pyx":342
  * 
  *     for i in range(unit_count):
  *         targets[i] = find_target(types[i], positions[i, 0], positions[i, 1],             # <<<<<<<<<<<<<<
@@ -4887,17 +5380,17 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_find_all_targets(CYTHON_UNU
     __pyx_t_13 = __pyx_v_i;
     __pyx_t_14 = 1;
 
-    /* "rock_paper_scissors_core.pyx":280
+    /* "rock_paper_scissors_core.pyx":343
  *     for i in range(unit_count):
  *         targets[i] = find_target(types[i], positions[i, 0], positions[i, 1],
  *                                positions, types, unit_count)             # <<<<<<<<<<<<<<
  * 
  *     return targets
  */
-    __pyx_t_15 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_positions), PyBUF_WRITABLE); if (unlikely(!__pyx_t_15.memview)) __PYX_ERR(0, 280, __pyx_L1_error)
-    __pyx_t_16 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(((PyObject *)__pyx_v_types), PyBUF_WRITABLE); if (unlikely(!__pyx_t_16.memview)) __PYX_ERR(0, 280, __pyx_L1_error)
+    __pyx_t_15 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_positions), PyBUF_WRITABLE); if (unlikely(!__pyx_t_15.memview)) __PYX_ERR(0, 343, __pyx_L1_error)
+    __pyx_t_16 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(((PyObject *)__pyx_v_types), PyBUF_WRITABLE); if (unlikely(!__pyx_t_16.memview)) __PYX_ERR(0, 343, __pyx_L1_error)
 
-    /* "rock_paper_scissors_core.pyx":279
+    /* "rock_paper_scissors_core.pyx":342
  * 
  *     for i in range(unit_count):
  *         targets[i] = find_target(types[i], positions[i, 0], positions[i, 1],             # <<<<<<<<<<<<<<
@@ -4914,7 +5407,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_find_all_targets(CYTHON_UNU
     __pyx_t_16.data = NULL;
   }
 
-  /* "rock_paper_scissors_core.pyx":282
+  /* "rock_paper_scissors_core.pyx":345
  *                                positions, types, unit_count)
  * 
  *     return targets             # <<<<<<<<<<<<<<
@@ -4926,7 +5419,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_find_all_targets(CYTHON_UNU
   __pyx_r = ((PyObject *)__pyx_v_targets);
   goto __pyx_L0;
 
-  /* "rock_paper_scissors_core.pyx":272
+  /* "rock_paper_scissors_core.pyx":335
  * 
  * # Python-accessible functions
  * def find_all_targets(np.ndarray[double, ndim=2] positions, np.ndarray[int, ndim=1] types):             # <<<<<<<<<<<<<<
@@ -4965,7 +5458,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_find_all_targets(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "rock_paper_scissors_core.pyx":284
+/* "rock_paper_scissors_core.pyx":347
  *     return targets
  * 
  * def update_movement(np.ndarray[double, ndim=2] positions,             # <<<<<<<<<<<<<<
@@ -5012,17 +5505,17 @@ static PyObject *__pyx_pw_24rock_paper_scissors_core_3update_movement(PyObject *
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_types)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("update_movement", 1, 3, 3, 1); __PYX_ERR(0, 284, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("update_movement", 1, 3, 3, 1); __PYX_ERR(0, 347, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_targets)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("update_movement", 1, 3, 3, 2); __PYX_ERR(0, 284, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("update_movement", 1, 3, 3, 2); __PYX_ERR(0, 347, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "update_movement") < 0)) __PYX_ERR(0, 284, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "update_movement") < 0)) __PYX_ERR(0, 347, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -5037,15 +5530,15 @@ static PyObject *__pyx_pw_24rock_paper_scissors_core_3update_movement(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("update_movement", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 284, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("update_movement", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 347, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("rock_paper_scissors_core.update_movement", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_positions), __pyx_ptype_5numpy_ndarray, 1, "positions", 0))) __PYX_ERR(0, 284, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_types), __pyx_ptype_5numpy_ndarray, 1, "types", 0))) __PYX_ERR(0, 285, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_targets), __pyx_ptype_5numpy_ndarray, 1, "targets", 0))) __PYX_ERR(0, 286, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_positions), __pyx_ptype_5numpy_ndarray, 1, "positions", 0))) __PYX_ERR(0, 347, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_types), __pyx_ptype_5numpy_ndarray, 1, "types", 0))) __PYX_ERR(0, 348, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_targets), __pyx_ptype_5numpy_ndarray, 1, "targets", 0))) __PYX_ERR(0, 349, __pyx_L1_error)
   __pyx_r = __pyx_pf_24rock_paper_scissors_core_2update_movement(__pyx_self, __pyx_v_positions, __pyx_v_types, __pyx_v_targets);
 
   /* function exit code */
@@ -5106,21 +5599,21 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_2update_movement(CYTHON_UNU
   __pyx_pybuffernd_targets.rcbuffer = &__pyx_pybuffer_targets;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_positions.rcbuffer->pybuffer, (PyObject*)__pyx_v_positions, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 284, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_positions.rcbuffer->pybuffer, (PyObject*)__pyx_v_positions, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 347, __pyx_L1_error)
   }
   __pyx_pybuffernd_positions.diminfo[0].strides = __pyx_pybuffernd_positions.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_positions.diminfo[0].shape = __pyx_pybuffernd_positions.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_positions.diminfo[1].strides = __pyx_pybuffernd_positions.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_positions.diminfo[1].shape = __pyx_pybuffernd_positions.rcbuffer->pybuffer.shape[1];
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_types.rcbuffer->pybuffer, (PyObject*)__pyx_v_types, &__Pyx_TypeInfo_int, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 284, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_types.rcbuffer->pybuffer, (PyObject*)__pyx_v_types, &__Pyx_TypeInfo_int, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 347, __pyx_L1_error)
   }
   __pyx_pybuffernd_types.diminfo[0].strides = __pyx_pybuffernd_types.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_types.diminfo[0].shape = __pyx_pybuffernd_types.rcbuffer->pybuffer.shape[0];
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_targets.rcbuffer->pybuffer, (PyObject*)__pyx_v_targets, &__Pyx_TypeInfo_int, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 284, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_targets.rcbuffer->pybuffer, (PyObject*)__pyx_v_targets, &__Pyx_TypeInfo_int, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 347, __pyx_L1_error)
   }
   __pyx_pybuffernd_targets.diminfo[0].strides = __pyx_pybuffernd_targets.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_targets.diminfo[0].shape = __pyx_pybuffernd_targets.rcbuffer->pybuffer.shape[0];
 
-  /* "rock_paper_scissors_core.pyx":288
+  /* "rock_paper_scissors_core.pyx":351
  *                    np.ndarray[int, ndim=1] targets):
  *     """Update positions for all units"""
  *     cdef int unit_count = positions.shape[0]             # <<<<<<<<<<<<<<
@@ -5129,21 +5622,21 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_2update_movement(CYTHON_UNU
  */
   __pyx_v_unit_count = (__pyx_v_positions->dimensions[0]);
 
-  /* "rock_paper_scissors_core.pyx":289
+  /* "rock_paper_scissors_core.pyx":352
  *     """Update positions for all units"""
  *     cdef int unit_count = positions.shape[0]
  *     cdef np.ndarray[double, ndim=2] velocities = np.zeros((unit_count, 2), dtype=np.float64)             # <<<<<<<<<<<<<<
  *     cdef int i
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_unit_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_unit_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -5151,32 +5644,32 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_2update_movement(CYTHON_UNU
   __Pyx_GIVEREF(__pyx_int_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_int_2);
   __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 289, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 289, __pyx_L1_error)
+  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 352, __pyx_L1_error)
   __pyx_t_6 = ((PyArrayObject *)__pyx_t_5);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_velocities.rcbuffer->pybuffer, (PyObject*)__pyx_t_6, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_velocities = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_velocities.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 289, __pyx_L1_error)
+      __PYX_ERR(0, 352, __pyx_L1_error)
     } else {__pyx_pybuffernd_velocities.diminfo[0].strides = __pyx_pybuffernd_velocities.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_velocities.diminfo[0].shape = __pyx_pybuffernd_velocities.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_velocities.diminfo[1].strides = __pyx_pybuffernd_velocities.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_velocities.diminfo[1].shape = __pyx_pybuffernd_velocities.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -5184,7 +5677,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_2update_movement(CYTHON_UNU
   __pyx_v_velocities = ((PyArrayObject *)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "rock_paper_scissors_core.pyx":293
+  /* "rock_paper_scissors_core.pyx":356
  * 
  *     # Calculate movements for all units
  *     for i in range(unit_count):             # <<<<<<<<<<<<<<
@@ -5196,17 +5689,17 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_2update_movement(CYTHON_UNU
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "rock_paper_scissors_core.pyx":294
+    /* "rock_paper_scissors_core.pyx":357
  *     # Calculate movements for all units
  *     for i in range(unit_count):
  *         calculate_movement(i, positions, types, velocities, targets, unit_count)             # <<<<<<<<<<<<<<
  * 
  *     # Apply movements to all units
  */
-    __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_positions), PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 294, __pyx_L1_error)
-    __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(((PyObject *)__pyx_v_types), PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 294, __pyx_L1_error)
-    __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_velocities), PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 294, __pyx_L1_error)
-    __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(((PyObject *)__pyx_v_targets), PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_positions), PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 357, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(((PyObject *)__pyx_v_types), PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 357, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_velocities), PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 357, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(((PyObject *)__pyx_v_targets), PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 357, __pyx_L1_error)
     __pyx_f_24rock_paper_scissors_core_calculate_movement(__pyx_v_i, __pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_13, __pyx_v_unit_count);
     __PYX_XDEC_MEMVIEW(&__pyx_t_10, 1);
     __pyx_t_10.memview = NULL;
@@ -5222,15 +5715,15 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_2update_movement(CYTHON_UNU
     __pyx_t_13.data = NULL;
   }
 
-  /* "rock_paper_scissors_core.pyx":297
+  /* "rock_paper_scissors_core.pyx":360
  * 
  *     # Apply movements to all units
  *     apply_movement(unit_count, positions, velocities)             # <<<<<<<<<<<<<<
  * 
  *     return velocities
  */
-  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_positions), PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 297, __pyx_L1_error)
-  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_velocities), PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 297, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_positions), PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 360, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_velocities), PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 360, __pyx_L1_error)
   __pyx_f_24rock_paper_scissors_core_apply_movement(__pyx_v_unit_count, __pyx_t_12, __pyx_t_10);
   __PYX_XDEC_MEMVIEW(&__pyx_t_12, 1);
   __pyx_t_12.memview = NULL;
@@ -5239,7 +5732,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_2update_movement(CYTHON_UNU
   __pyx_t_10.memview = NULL;
   __pyx_t_10.data = NULL;
 
-  /* "rock_paper_scissors_core.pyx":299
+  /* "rock_paper_scissors_core.pyx":362
  *     apply_movement(unit_count, positions, velocities)
  * 
  *     return velocities             # <<<<<<<<<<<<<<
@@ -5251,7 +5744,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_2update_movement(CYTHON_UNU
   __pyx_r = ((PyObject *)__pyx_v_velocities);
   goto __pyx_L0;
 
-  /* "rock_paper_scissors_core.pyx":284
+  /* "rock_paper_scissors_core.pyx":347
  *     return targets
  * 
  * def update_movement(np.ndarray[double, ndim=2] positions,             # <<<<<<<<<<<<<<
@@ -5294,7 +5787,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_2update_movement(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "rock_paper_scissors_core.pyx":301
+/* "rock_paper_scissors_core.pyx":364
  *     return velocities
  * 
  * def check_all_collisions(np.ndarray[double, ndim=2] positions, np.ndarray[int, ndim=1] types):             # <<<<<<<<<<<<<<
@@ -5338,11 +5831,11 @@ static PyObject *__pyx_pw_24rock_paper_scissors_core_5check_all_collisions(PyObj
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_types)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("check_all_collisions", 1, 2, 2, 1); __PYX_ERR(0, 301, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("check_all_collisions", 1, 2, 2, 1); __PYX_ERR(0, 364, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "check_all_collisions") < 0)) __PYX_ERR(0, 301, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "check_all_collisions") < 0)) __PYX_ERR(0, 364, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5355,14 +5848,14 @@ static PyObject *__pyx_pw_24rock_paper_scissors_core_5check_all_collisions(PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("check_all_collisions", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 301, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("check_all_collisions", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 364, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("rock_paper_scissors_core.check_all_collisions", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_positions), __pyx_ptype_5numpy_ndarray, 1, "positions", 0))) __PYX_ERR(0, 301, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_types), __pyx_ptype_5numpy_ndarray, 1, "types", 0))) __PYX_ERR(0, 301, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_positions), __pyx_ptype_5numpy_ndarray, 1, "positions", 0))) __PYX_ERR(0, 364, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_types), __pyx_ptype_5numpy_ndarray, 1, "types", 0))) __PYX_ERR(0, 364, __pyx_L1_error)
   __pyx_r = __pyx_pf_24rock_paper_scissors_core_4check_all_collisions(__pyx_self, __pyx_v_positions, __pyx_v_types);
 
   /* function exit code */
@@ -5412,16 +5905,16 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_4check_all_collisions(CYTHO
   __pyx_pybuffernd_types.rcbuffer = &__pyx_pybuffer_types;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_positions.rcbuffer->pybuffer, (PyObject*)__pyx_v_positions, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 301, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_positions.rcbuffer->pybuffer, (PyObject*)__pyx_v_positions, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 364, __pyx_L1_error)
   }
   __pyx_pybuffernd_positions.diminfo[0].strides = __pyx_pybuffernd_positions.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_positions.diminfo[0].shape = __pyx_pybuffernd_positions.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_positions.diminfo[1].strides = __pyx_pybuffernd_positions.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_positions.diminfo[1].shape = __pyx_pybuffernd_positions.rcbuffer->pybuffer.shape[1];
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_types.rcbuffer->pybuffer, (PyObject*)__pyx_v_types, &__Pyx_TypeInfo_int, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 301, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_types.rcbuffer->pybuffer, (PyObject*)__pyx_v_types, &__Pyx_TypeInfo_int, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 364, __pyx_L1_error)
   }
   __pyx_pybuffernd_types.diminfo[0].strides = __pyx_pybuffernd_types.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_types.diminfo[0].shape = __pyx_pybuffernd_types.rcbuffer->pybuffer.shape[0];
 
-  /* "rock_paper_scissors_core.pyx":303
+  /* "rock_paper_scissors_core.pyx":366
  * def check_all_collisions(np.ndarray[double, ndim=2] positions, np.ndarray[int, ndim=1] types):
  *     """Check collisions for all units and return new types"""
  *     cdef int unit_count = positions.shape[0]             # <<<<<<<<<<<<<<
@@ -5430,21 +5923,21 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_4check_all_collisions(CYTHO
  */
   __pyx_v_unit_count = (__pyx_v_positions->dimensions[0]);
 
-  /* "rock_paper_scissors_core.pyx":304
+  /* "rock_paper_scissors_core.pyx":367
  *     """Check collisions for all units and return new types"""
  *     cdef int unit_count = positions.shape[0]
  *     cdef np.ndarray[int, ndim=1] new_types = np.full(unit_count, -1, dtype=np.int32)             # <<<<<<<<<<<<<<
  * 
  *     check_collisions(unit_count, positions, types, new_types)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_full); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_full); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_unit_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_unit_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -5452,27 +5945,27 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_4check_all_collisions(CYTHO
   __Pyx_GIVEREF(__pyx_int_neg_1);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_int_neg_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 304, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 304, __pyx_L1_error)
+  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 367, __pyx_L1_error)
   __pyx_t_6 = ((PyArrayObject *)__pyx_t_5);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_new_types.rcbuffer->pybuffer, (PyObject*)__pyx_t_6, &__Pyx_TypeInfo_int, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_new_types = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_new_types.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 304, __pyx_L1_error)
+      __PYX_ERR(0, 367, __pyx_L1_error)
     } else {__pyx_pybuffernd_new_types.diminfo[0].strides = __pyx_pybuffernd_new_types.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_new_types.diminfo[0].shape = __pyx_pybuffernd_new_types.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -5480,16 +5973,16 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_4check_all_collisions(CYTHO
   __pyx_v_new_types = ((PyArrayObject *)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "rock_paper_scissors_core.pyx":306
+  /* "rock_paper_scissors_core.pyx":369
  *     cdef np.ndarray[int, ndim=1] new_types = np.full(unit_count, -1, dtype=np.int32)
  * 
  *     check_collisions(unit_count, positions, types, new_types)             # <<<<<<<<<<<<<<
  * 
  *     return new_types
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_positions), PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 306, __pyx_L1_error)
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(((PyObject *)__pyx_v_types), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 306, __pyx_L1_error)
-  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(((PyObject *)__pyx_v_new_types), PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 306, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(((PyObject *)__pyx_v_positions), PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 369, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(((PyObject *)__pyx_v_types), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 369, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(((PyObject *)__pyx_v_new_types), PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 369, __pyx_L1_error)
   __pyx_f_24rock_paper_scissors_core_check_collisions(__pyx_v_unit_count, __pyx_t_7, __pyx_t_8, __pyx_t_9);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __pyx_t_7.memview = NULL;
@@ -5501,7 +5994,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_4check_all_collisions(CYTHO
   __pyx_t_9.memview = NULL;
   __pyx_t_9.data = NULL;
 
-  /* "rock_paper_scissors_core.pyx":308
+  /* "rock_paper_scissors_core.pyx":371
  *     check_collisions(unit_count, positions, types, new_types)
  * 
  *     return new_types             # <<<<<<<<<<<<<<
@@ -5513,7 +6006,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_4check_all_collisions(CYTHO
   __pyx_r = ((PyObject *)__pyx_v_new_types);
   goto __pyx_L0;
 
-  /* "rock_paper_scissors_core.pyx":301
+  /* "rock_paper_scissors_core.pyx":364
  *     return velocities
  * 
  * def check_all_collisions(np.ndarray[double, ndim=2] positions, np.ndarray[int, ndim=1] types):             # <<<<<<<<<<<<<<
@@ -5553,7 +6046,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_4check_all_collisions(CYTHO
   return __pyx_r;
 }
 
-/* "rock_paper_scissors_core.pyx":310
+/* "rock_paper_scissors_core.pyx":373
  *     return new_types
  * 
  * def initialize_random_positions(int count, int width, int height, int radius):             # <<<<<<<<<<<<<<
@@ -5603,23 +6096,23 @@ static PyObject *__pyx_pw_24rock_paper_scissors_core_7initialize_random_position
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_width)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("initialize_random_positions", 1, 4, 4, 1); __PYX_ERR(0, 310, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("initialize_random_positions", 1, 4, 4, 1); __PYX_ERR(0, 373, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_height)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("initialize_random_positions", 1, 4, 4, 2); __PYX_ERR(0, 310, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("initialize_random_positions", 1, 4, 4, 2); __PYX_ERR(0, 373, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_radius)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("initialize_random_positions", 1, 4, 4, 3); __PYX_ERR(0, 310, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("initialize_random_positions", 1, 4, 4, 3); __PYX_ERR(0, 373, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "initialize_random_positions") < 0)) __PYX_ERR(0, 310, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "initialize_random_positions") < 0)) __PYX_ERR(0, 373, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -5629,14 +6122,14 @@ static PyObject *__pyx_pw_24rock_paper_scissors_core_7initialize_random_position
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
-    __pyx_v_count = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_count == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 310, __pyx_L3_error)
-    __pyx_v_width = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_width == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 310, __pyx_L3_error)
-    __pyx_v_height = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_height == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 310, __pyx_L3_error)
-    __pyx_v_radius = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_radius == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 310, __pyx_L3_error)
+    __pyx_v_count = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_count == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 373, __pyx_L3_error)
+    __pyx_v_width = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_width == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 373, __pyx_L3_error)
+    __pyx_v_height = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_height == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 373, __pyx_L3_error)
+    __pyx_v_radius = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_radius == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 373, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("initialize_random_positions", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 310, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("initialize_random_positions", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 373, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("rock_paper_scissors_core.initialize_random_positions", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5676,21 +6169,21 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_6initialize_random_position
   __pyx_pybuffernd_positions.data = NULL;
   __pyx_pybuffernd_positions.rcbuffer = &__pyx_pybuffer_positions;
 
-  /* "rock_paper_scissors_core.pyx":312
+  /* "rock_paper_scissors_core.pyx":375
  * def initialize_random_positions(int count, int width, int height, int radius):
  *     """Generate random positions for units"""
  *     cdef np.ndarray[double, ndim=2] positions = np.zeros((count, 2), dtype=np.float64)             # <<<<<<<<<<<<<<
  *     cdef int i
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -5698,32 +6191,32 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_6initialize_random_position
   __Pyx_GIVEREF(__pyx_int_2);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_int_2);
   __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 312, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 312, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 312, __pyx_L1_error)
+  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 375, __pyx_L1_error)
   __pyx_t_6 = ((PyArrayObject *)__pyx_t_5);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_positions.rcbuffer->pybuffer, (PyObject*)__pyx_t_6, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_positions = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_positions.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 312, __pyx_L1_error)
+      __PYX_ERR(0, 375, __pyx_L1_error)
     } else {__pyx_pybuffernd_positions.diminfo[0].strides = __pyx_pybuffernd_positions.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_positions.diminfo[0].shape = __pyx_pybuffernd_positions.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_positions.diminfo[1].strides = __pyx_pybuffernd_positions.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_positions.diminfo[1].shape = __pyx_pybuffernd_positions.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -5731,7 +6224,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_6initialize_random_position
   __pyx_v_positions = ((PyArrayObject *)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "rock_paper_scissors_core.pyx":315
+  /* "rock_paper_scissors_core.pyx":378
  *     cdef int i
  * 
  *     for i in range(count):             # <<<<<<<<<<<<<<
@@ -5743,7 +6236,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_6initialize_random_position
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "rock_paper_scissors_core.pyx":316
+    /* "rock_paper_scissors_core.pyx":379
  * 
  *     for i in range(count):
  *         positions[i, 0] = radius + rand_double() * (width - 2 * radius)             # <<<<<<<<<<<<<<
@@ -5754,7 +6247,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_6initialize_random_position
     __pyx_t_11 = 0;
     *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_positions.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_positions.diminfo[0].strides, __pyx_t_11, __pyx_pybuffernd_positions.diminfo[1].strides) = (__pyx_v_radius + (__pyx_f_24rock_paper_scissors_core_rand_double() * (__pyx_v_width - (2 * __pyx_v_radius))));
 
-    /* "rock_paper_scissors_core.pyx":317
+    /* "rock_paper_scissors_core.pyx":380
  *     for i in range(count):
  *         positions[i, 0] = radius + rand_double() * (width - 2 * radius)
  *         positions[i, 1] = radius + rand_double() * (height - 2 * radius)             # <<<<<<<<<<<<<<
@@ -5766,7 +6259,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_6initialize_random_position
     *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_positions.rcbuffer->pybuffer.buf, __pyx_t_11, __pyx_pybuffernd_positions.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_positions.diminfo[1].strides) = (__pyx_v_radius + (__pyx_f_24rock_paper_scissors_core_rand_double() * (__pyx_v_height - (2 * __pyx_v_radius))));
   }
 
-  /* "rock_paper_scissors_core.pyx":319
+  /* "rock_paper_scissors_core.pyx":382
  *         positions[i, 1] = radius + rand_double() * (height - 2 * radius)
  * 
  *     return positions             # <<<<<<<<<<<<<<
@@ -5776,7 +6269,7 @@ static PyObject *__pyx_pf_24rock_paper_scissors_core_6initialize_random_position
   __pyx_r = ((PyObject *)__pyx_v_positions);
   goto __pyx_L0;
 
-  /* "rock_paper_scissors_core.pyx":310
+  /* "rock_paper_scissors_core.pyx":373
  *     return new_types
  * 
  * def initialize_random_positions(int count, int width, int height, int radius):             # <<<<<<<<<<<<<<
@@ -20756,7 +21249,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 75, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 944, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(2, 134, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(2, 149, __pyx_L1_error)
@@ -20991,53 +21484,53 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "rock_paper_scissors_core.pyx":272
+  /* "rock_paper_scissors_core.pyx":335
  * 
  * # Python-accessible functions
  * def find_all_targets(np.ndarray[double, ndim=2] positions, np.ndarray[int, ndim=1] types):             # <<<<<<<<<<<<<<
  *     """Find targets for all units"""
  *     cdef int unit_count = positions.shape[0]
  */
-  __pyx_tuple__22 = PyTuple_Pack(5, __pyx_n_s_positions, __pyx_n_s_types, __pyx_n_s_unit_count, __pyx_n_s_targets, __pyx_n_s_i); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_tuple__22 = PyTuple_Pack(5, __pyx_n_s_positions, __pyx_n_s_types, __pyx_n_s_unit_count, __pyx_n_s_targets, __pyx_n_s_i); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 335, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_rock_paper_scissors_core_pyx, __pyx_n_s_find_all_targets, 272, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_rock_paper_scissors_core_pyx, __pyx_n_s_find_all_targets, 335, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 335, __pyx_L1_error)
 
-  /* "rock_paper_scissors_core.pyx":284
+  /* "rock_paper_scissors_core.pyx":347
  *     return targets
  * 
  * def update_movement(np.ndarray[double, ndim=2] positions,             # <<<<<<<<<<<<<<
  *                    np.ndarray[int, ndim=1] types,
  *                    np.ndarray[int, ndim=1] targets):
  */
-  __pyx_tuple__24 = PyTuple_Pack(6, __pyx_n_s_positions, __pyx_n_s_types, __pyx_n_s_targets, __pyx_n_s_unit_count, __pyx_n_s_velocities, __pyx_n_s_i); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 284, __pyx_L1_error)
+  __pyx_tuple__24 = PyTuple_Pack(6, __pyx_n_s_positions, __pyx_n_s_types, __pyx_n_s_targets, __pyx_n_s_unit_count, __pyx_n_s_velocities, __pyx_n_s_i); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 347, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__24);
   __Pyx_GIVEREF(__pyx_tuple__24);
-  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_rock_paper_scissors_core_pyx, __pyx_n_s_update_movement, 284, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 284, __pyx_L1_error)
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_rock_paper_scissors_core_pyx, __pyx_n_s_update_movement, 347, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 347, __pyx_L1_error)
 
-  /* "rock_paper_scissors_core.pyx":301
+  /* "rock_paper_scissors_core.pyx":364
  *     return velocities
  * 
  * def check_all_collisions(np.ndarray[double, ndim=2] positions, np.ndarray[int, ndim=1] types):             # <<<<<<<<<<<<<<
  *     """Check collisions for all units and return new types"""
  *     cdef int unit_count = positions.shape[0]
  */
-  __pyx_tuple__26 = PyTuple_Pack(4, __pyx_n_s_positions, __pyx_n_s_types, __pyx_n_s_unit_count, __pyx_n_s_new_types); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_tuple__26 = PyTuple_Pack(4, __pyx_n_s_positions, __pyx_n_s_types, __pyx_n_s_unit_count, __pyx_n_s_new_types); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__26);
   __Pyx_GIVEREF(__pyx_tuple__26);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_rock_paper_scissors_core_pyx, __pyx_n_s_check_all_collisions, 301, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_rock_paper_scissors_core_pyx, __pyx_n_s_check_all_collisions, 364, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 364, __pyx_L1_error)
 
-  /* "rock_paper_scissors_core.pyx":310
+  /* "rock_paper_scissors_core.pyx":373
  *     return new_types
  * 
  * def initialize_random_positions(int count, int width, int height, int radius):             # <<<<<<<<<<<<<<
  *     """Generate random positions for units"""
  *     cdef np.ndarray[double, ndim=2] positions = np.zeros((count, 2), dtype=np.float64)
  */
-  __pyx_tuple__28 = PyTuple_Pack(6, __pyx_n_s_count, __pyx_n_s_width, __pyx_n_s_height, __pyx_n_s_radius, __pyx_n_s_positions, __pyx_n_s_i); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 310, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(6, __pyx_n_s_count, __pyx_n_s_width, __pyx_n_s_height, __pyx_n_s_radius, __pyx_n_s_positions, __pyx_n_s_i); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 373, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
-  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_rock_paper_scissors_core_pyx, __pyx_n_s_initialize_random_positions, 310, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 310, __pyx_L1_error)
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(4, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_rock_paper_scissors_core_pyx, __pyx_n_s_initialize_random_positions, 373, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 373, __pyx_L1_error)
 
   /* "View.MemoryView":287
  *         return self.name
@@ -21585,7 +22078,7 @@ if (!__Pyx_RefNanny) {
  * cdef double GROUP_COHESION = 0.1
  * cdef double GROUP_ALIGNMENT = 0.1             # <<<<<<<<<<<<<<
  * cdef double GROUP_RADIUS = 100.0
- * cdef double CENTER_FORCE = 0.9
+ * cdef double CENTER_FORCE = 0
  */
   __pyx_v_24rock_paper_scissors_core_GROUP_ALIGNMENT = 0.1;
 
@@ -21593,7 +22086,7 @@ if (!__Pyx_RefNanny) {
  * cdef double GROUP_COHESION = 0.1
  * cdef double GROUP_ALIGNMENT = 0.1
  * cdef double GROUP_RADIUS = 100.0             # <<<<<<<<<<<<<<
- * cdef double CENTER_FORCE = 0.9
+ * cdef double CENTER_FORCE = 0
  * cdef int WIDTH = 960
  */
   __pyx_v_24rock_paper_scissors_core_GROUP_RADIUS = 100.0;
@@ -21601,15 +22094,15 @@ if (!__Pyx_RefNanny) {
   /* "rock_paper_scissors_core.pyx":21
  * cdef double GROUP_ALIGNMENT = 0.1
  * cdef double GROUP_RADIUS = 100.0
- * cdef double CENTER_FORCE = 0.9             # <<<<<<<<<<<<<<
+ * cdef double CENTER_FORCE = 0             # <<<<<<<<<<<<<<
  * cdef int WIDTH = 960
  * cdef int HEIGHT = 960
  */
-  __pyx_v_24rock_paper_scissors_core_CENTER_FORCE = 0.9;
+  __pyx_v_24rock_paper_scissors_core_CENTER_FORCE = 0.0;
 
   /* "rock_paper_scissors_core.pyx":22
  * cdef double GROUP_RADIUS = 100.0
- * cdef double CENTER_FORCE = 0.9
+ * cdef double CENTER_FORCE = 0
  * cdef int WIDTH = 960             # <<<<<<<<<<<<<<
  * cdef int HEIGHT = 960
  * 
@@ -21617,7 +22110,7 @@ if (!__Pyx_RefNanny) {
   __pyx_v_24rock_paper_scissors_core_WIDTH = 0x3C0;
 
   /* "rock_paper_scissors_core.pyx":23
- * cdef double CENTER_FORCE = 0.9
+ * cdef double CENTER_FORCE = 0
  * cdef int WIDTH = 960
  * cdef int HEIGHT = 960             # <<<<<<<<<<<<<<
  * 
@@ -21625,52 +22118,52 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_v_24rock_paper_scissors_core_HEIGHT = 0x3C0;
 
-  /* "rock_paper_scissors_core.pyx":272
+  /* "rock_paper_scissors_core.pyx":335
  * 
  * # Python-accessible functions
  * def find_all_targets(np.ndarray[double, ndim=2] positions, np.ndarray[int, ndim=1] types):             # <<<<<<<<<<<<<<
  *     """Find targets for all units"""
  *     cdef int unit_count = positions.shape[0]
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24rock_paper_scissors_core_1find_all_targets, NULL, __pyx_n_s_rock_paper_scissors_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24rock_paper_scissors_core_1find_all_targets, NULL, __pyx_n_s_rock_paper_scissors_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_find_all_targets, __pyx_t_1) < 0) __PYX_ERR(0, 272, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_find_all_targets, __pyx_t_1) < 0) __PYX_ERR(0, 335, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "rock_paper_scissors_core.pyx":284
+  /* "rock_paper_scissors_core.pyx":347
  *     return targets
  * 
  * def update_movement(np.ndarray[double, ndim=2] positions,             # <<<<<<<<<<<<<<
  *                    np.ndarray[int, ndim=1] types,
  *                    np.ndarray[int, ndim=1] targets):
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24rock_paper_scissors_core_3update_movement, NULL, __pyx_n_s_rock_paper_scissors_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 284, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24rock_paper_scissors_core_3update_movement, NULL, __pyx_n_s_rock_paper_scissors_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 347, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_update_movement, __pyx_t_1) < 0) __PYX_ERR(0, 284, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_update_movement, __pyx_t_1) < 0) __PYX_ERR(0, 347, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "rock_paper_scissors_core.pyx":301
+  /* "rock_paper_scissors_core.pyx":364
  *     return velocities
  * 
  * def check_all_collisions(np.ndarray[double, ndim=2] positions, np.ndarray[int, ndim=1] types):             # <<<<<<<<<<<<<<
  *     """Check collisions for all units and return new types"""
  *     cdef int unit_count = positions.shape[0]
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24rock_paper_scissors_core_5check_all_collisions, NULL, __pyx_n_s_rock_paper_scissors_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24rock_paper_scissors_core_5check_all_collisions, NULL, __pyx_n_s_rock_paper_scissors_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_check_all_collisions, __pyx_t_1) < 0) __PYX_ERR(0, 301, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_check_all_collisions, __pyx_t_1) < 0) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "rock_paper_scissors_core.pyx":310
+  /* "rock_paper_scissors_core.pyx":373
  *     return new_types
  * 
  * def initialize_random_positions(int count, int width, int height, int radius):             # <<<<<<<<<<<<<<
  *     """Generate random positions for units"""
  *     cdef np.ndarray[double, ndim=2] positions = np.zeros((count, 2), dtype=np.float64)
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24rock_paper_scissors_core_7initialize_random_positions, NULL, __pyx_n_s_rock_paper_scissors_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 310, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24rock_paper_scissors_core_7initialize_random_positions, NULL, __pyx_n_s_rock_paper_scissors_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 373, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_initialize_random_positions, __pyx_t_1) < 0) __PYX_ERR(0, 310, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_initialize_random_positions, __pyx_t_1) < 0) __PYX_ERR(0, 373, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "rock_paper_scissors_core.pyx":1
