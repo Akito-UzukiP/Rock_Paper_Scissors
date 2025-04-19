@@ -13,6 +13,12 @@ pygame.init()
 # Constants
 WIDTH, HEIGHT = 960, 960
 FPS = 144
+
+# Benchmark support
+if len(sys.argv) >= 5 and sys.argv[4] == '-b':
+    MAX_TIME = int(sys.argv[5])
+    print(f'Running in benchmark mode with MAX_TIME={MAX_TIME}')
+
 MAX_TIME = 3000  # frames before declaring a draw
 BACKGROUND_COLOR = (30, 30, 30)
 

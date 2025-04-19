@@ -7,16 +7,33 @@ This is a simulation of multiple Rock-Paper-Scissors units moving around a map a
 - Python 3.x
 - Pygame
 - NumPy
+- Cython (for optimized version)
+- Matplotlib (for benchmarking)
 
 ## Installation
 
 ```bash
-pip install pygame numpy
+pip install pygame numpy cython matplotlib
+```
+
+## Performance Optimization
+
+This project includes both a pure Python implementation and a Cython-optimized version that offers significant performance improvements:
+
+- The Cython implementation is approximately 2.5x faster than the pure Python version
+- Computationally intensive operations like movement calculations, collision detection, and target finding have been optimized using Cython's static typing and C-level performance
+
+To build the Cython module:
+
+```bash
+python setup.py build_ext --inplace
 ```
 
 ## How to Run
 
-Run the simulation with default settings (50 units of each type):
+### Pure Python Version
+
+Run the simulation with default settings (80 units of each type):
 
 ```bash
 python rock_paper_scissors_sim.py
@@ -27,6 +44,36 @@ Or specify the initial number of scissors, rocks, and papers:
 ```bash
 python rock_paper_scissors_sim.py 20 30 40
 ```
+
+### Cython-Optimized Version
+
+First, build the Cython module:
+
+```bash
+python setup.py build_ext --inplace
+```
+
+Then run the optimized version:
+
+```bash
+python rock_paper_scissors_sim_cython.py
+```
+
+You can also specify the initial unit counts:
+
+```bash
+python rock_paper_scissors_sim_cython.py 20 30 40
+```
+
+### Benchmark Comparison
+
+To compare the performance of both implementations:
+
+```bash
+python benchmark_comparison.py
+```
+
+This will run both versions with the same parameters and generate a performance comparison graph saved as `benchmark_results.png`.
 
 ## Target Selection
 
